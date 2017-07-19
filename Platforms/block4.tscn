@@ -1,0 +1,168 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
+[ext_resource path="res://TileSet/Tree.png" type="Texture" id=3]
+[ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TileSet/Water.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=7]
+
+[node name="TileMap" type="TileMap"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 32
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -65534, 19, -65531, 23, -65530, 19, -65529, 75, -65528, 74, -65527, 76, -65526, 19, 0, 20, 1, 21, 2, 21, 3, 27, 4, 27, 5, 20, 6, 21, 7, 21, 8, 21, 9, 21, 10, 21, 11, 22, 65536, 24, 65537, 25, 65538, 26, 65541, 24, 65542, 25, 65543, 25, 65544, 25, 65545, 25, 65546, 25, 65547, 26, 131072, 24, 131073, 25, 131074, 26, 131077, 24, 131078, 25, 131079, 25, 131080, 25, 131081, 25, 131082, 25, 131083, 26, 196608, 24, 196609, 25, 196610, 26, 196613, 24, 196614, 25, 196615, 25, 196616, 25, 196617, 25, 196618, 25, 196619, 26, 262144, 24, 262145, 25, 262146, 26, 262149, 24, 262150, 25, 262151, 25, 262152, 25, 262153, 25, 262154, 25, 262155, 26, 327680, 24, 327681, 25, 327682, 26, 327685, 24, 327686, 25, 327687, 25, 327688, 25, 327689, 25, 327690, 25, 327691, 26, 393216, 24, 393217, 25, 393218, 26, 393221, 24, 393222, 25, 393223, 25, 393224, 25, 393225, 25, 393226, 25, 393227, 26, 458752, 24, 458753, 25, 458754, 26, 458757, 24, 458758, 25, 458759, 25, 458760, 25, 458761, 25, 458762, 25, 458763, 26, 524288, 24, 524289, 25, 524290, 26, 524293, 24, 524294, 25, 524295, 25, 524296, 25, 524297, 25, 524298, 25, 524299, 26, 589824, 24, 589825, 25, 589826, 26, 589829, 24, 589830, 25, 589831, 25, 589832, 25, 589833, 25, 589834, 25, 589835, 26, 655360, 24, 655361, 25, 655362, 26, 655365, 24, 655366, 25, 655367, 25, 655368, 25, 655369, 25, 655370, 25, 655371, 26, 720896, 34, 720897, 35, 720898, 35, 720899, 35, 720900, 35, 720901, 35, 720902, 35, 720903, 35, 720904, 35, 720905, 35, 720906, 35, 720907, 36 )
+script/script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 24, -22 )
+texture = ExtResource( 3 )
+
+[node name="Oneway Platform" parent="." instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 112, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Oneway Platform"]
+
+frame = 100
+
+[node name="Oneway Platform1" parent="." instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 128, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Oneway Platform1"]
+
+frame = 101
+
+[node name="Oneway Platform2" parent="." instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 144, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Oneway Platform2"]
+
+frame = 102
+
+[node name="Platforms" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 59, -57 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -16, 0 )
+
+[node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 4 )]
+
+[node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 16, 0 )
+
+[node name="Water" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Water" parent="Water" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 48, 10 )
+
+[node name="Water1" parent="Water" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 64, 10 )
+
+[node name="Fill" type="ColorFrame" parent="Water"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 48.0
+margin/top = 26.0
+margin/right = 80.0
+margin/bottom = 176.0
+color = Color( 0.121569, 0.584314, 0.882353, 1 )
+
+[node name="Coins" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Coin" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, -15 )
+
+[node name="Coin1" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 33, -15 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 50, -15 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 59, -74 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 76, -74 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 108, -16 )
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 125, -16 )
+
+[node name="Coin7" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 142, -16 )
+
+[node name="Coin8" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 160, -16 )
+
+[node name="Coin9" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 178, -16 )
+
+[node name="Coin10" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 128, -49 )
+
+[node name="Coin11" parent="Coins" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 145, -49 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 125, -38 )
+
+
+[editable path="Oneway Platform"]
+[editable path="Oneway Platform1"]
+[editable path="Oneway Platform2"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
+[ext_resource path="res://TileSet/Water.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=5]
+
+[node name="TileMap" type="TileMap"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -65531, 12, 0, 20, 1, 21, 2, 22, 3, 27, 4, 27, 5, 20, 6, 21, 7, 21, 8, 21, 9, 22, 65536, 24, 65537, 25, 65538, 26, 65541, 24, 65542, 25, 65543, 25, 65544, 25, 65545, 26, 131072, 24, 131073, 25, 131074, 26, 131077, 24, 131078, 25, 131079, 25, 131080, 25, 131081, 26, 196608, 24, 196609, 25, 196610, 26, 196613, 24, 196614, 25, 196615, 25, 196616, 25, 196617, 26, 262144, 24, 262145, 25, 262146, 26, 262149, 24, 262150, 25, 262151, 25, 262152, 25, 262153, 26, 327680, 24, 327681, 25, 327682, 26, 327685, 24, 327686, 25, 327687, 25, 327688, 25, 327689, 26, 393216, 24, 393217, 25, 393218, 26, 393221, 24, 393222, 25, 393223, 25, 393224, 25, 393225, 26, 458752, 24, 458753, 25, 458754, 26, 458757, 24, 458758, 25, 458759, 25, 458760, 25, 458761, 26, 524288, 24, 524289, 25, 524290, 26, 524293, 24, 524294, 25, 524295, 25, 524296, 25, 524297, 26, 589824, 24, 589825, 25, 589826, 25, 589827, 25, 589828, 25, 589829, 25, 589830, 25, 589831, 25, 589832, 25, 589833, 26, 655360, 24, 655361, 25, 655362, 25, 655363, 25, 655364, 25, 655365, 25, 655366, 25, 655367, 25, 655368, 25, 655369, 26, 720896, 24, 720897, 25, 720898, 25, 720899, 25, 720900, 25, 720901, 25, 720902, 25, 720903, 25, 720904, 25, 720905, 26, 786432, 24, 786433, 25, 786434, 25, 786435, 25, 786436, 25, 786437, 25, 786438, 25, 786439, 25, 786440, 25, 786441, 26, 851968, 24, 851969, 25, 851970, 25, 851971, 25, 851972, 25, 851973, 25, 851974, 25, 851975, 25, 851976, 25, 851977, 26, 917504, 24, 917505, 25, 917506, 25, 917507, 25, 917508, 25, 917509, 25, 917510, 25, 917511, 25, 917512, 25, 917513, 26, 983040, 24, 983041, 25, 983042, 25, 983043, 25, 983044, 25, 983045, 25, 983046, 25, 983047, 25, 983048, 25, 983049, 26, 1048576, 24, 1048577, 25, 1048578, 25, 1048579, 25, 1048580, 25, 1048581, 25, 1048582, 25, 1048583, 25, 1048584, 25, 1048585, 26, 1114112, 24, 1114113, 25, 1114114, 25, 1114115, 25, 1114116, 25, 1114117, 25, 1114118, 25, 1114119, 25, 1114120, 25, 1114121, 26, 1179648, 24, 1179649, 25, 1179650, 25, 1179651, 25, 1179652, 25, 1179653, 25, 1179654, 25, 1179655, 25, 1179656, 25, 1179657, 26, 1245184, 34, 1245185, 35, 1245186, 35, 1245187, 35, 1245188, 35, 1245189, 35, 1245190, 35, 1245191, 35, 1245192, 35, 1245193, 36 )
+script/script = ExtResource( 2 )
+
+[node name="Water" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Water" parent="Water" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 48, 16 )
+
+[node name="Water1" parent="Water" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 64, 16 )
+
+[node name="Fill" type="ColorFrame" parent="Water"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 48.0
+margin/top = 32.0
+margin/right = 80.0
+margin/bottom = 144.0
+color = Color( 0.121569, 0.584314, 0.882353, 1 )
+
+[node name="Coins" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Coin" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 16, -16 )
+
+[node name="Coin1" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 32, -16 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 48, -16 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 112, -16 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 128, -16 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 144, -16 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 48, -48 )
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 96, -48 )
+
+

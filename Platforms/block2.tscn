@@ -1,0 +1,200 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
+[ext_resource path="res://TileSet/Tree.png" type="Texture" id=3]
+[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=6]
+
+[node name="TileMap" type="TileMap"]
+
+transform/pos = Vector2( -48, 0 )
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -196588, 19, -65536, 19, -65532, 28, -65526, 19, -65517, 75, -65516, 74, -65515, 74, -65514, 74, -65513, 76, -65512, 19, -65511, 19, 0, 20, 1, 21, 2, 21, 3, 21, 4, 22, 9, 16, 10, 17, 11, 17, 12, 18, 18, 20, 19, 21, 20, 21, 21, 21, 22, 21, 23, 21, 24, 21, 25, 22, 65536, 24, 65537, 25, 65538, 25, 65539, 25, 65540, 26, 65554, 24, 65555, 25, 65556, 25, 65557, 25, 65558, 25, 65559, 25, 65560, 25, 65561, 26, 131072, 24, 131073, 25, 131074, 25, 131075, 25, 131076, 26, 131090, 24, 131091, 25, 131092, 25, 131093, 25, 131094, 25, 131095, 25, 131096, 25, 131097, 26, 196608, 24, 196609, 25, 196610, 25, 196611, 25, 196612, 26, 196626, 24, 196627, 25, 196628, 25, 196629, 25, 196630, 25, 196631, 25, 196632, 25, 196633, 26, 262144, 24, 262145, 25, 262146, 25, 262147, 25, 262148, 26, 262162, 24, 262163, 25, 262164, 25, 262165, 25, 262166, 25, 262167, 25, 262168, 25, 262169, 26, 327680, 24, 327681, 25, 327682, 25, 327683, 25, 327684, 26, 327698, 24, 327699, 25, 327700, 25, 327701, 25, 327702, 25, 327703, 25, 327704, 25, 327705, 26, 393216, 24, 393217, 25, 393218, 25, 393219, 25, 393220, 26, 393234, 24, 393235, 25, 393236, 25, 393237, 25, 393238, 25, 393239, 25, 393240, 25, 393241, 26, 458752, 24, 458753, 25, 458754, 25, 458755, 25, 458756, 26, 458770, 24, 458771, 25, 458772, 25, 458773, 25, 458774, 25, 458775, 25, 458776, 25, 458777, 26, 524288, 24, 524289, 25, 524290, 25, 524291, 25, 524292, 26, 524306, 24, 524307, 25, 524308, 25, 524309, 25, 524310, 25, 524311, 25, 524312, 25, 524313, 26, 589824, 24, 589825, 25, 589826, 25, 589827, 25, 589828, 26, 589842, 24, 589843, 25, 589844, 25, 589845, 25, 589846, 25, 589847, 25, 589848, 25, 589849, 26, 655360, 24, 655361, 25, 655362, 25, 655363, 25, 655364, 26, 655378, 24, 655379, 25, 655380, 25, 655381, 25, 655382, 25, 655383, 25, 655384, 25, 655385, 26, 720896, 24, 720897, 25, 720898, 25, 720899, 25, 720900, 26, 720914, 24, 720915, 25, 720916, 25, 720917, 25, 720918, 25, 720919, 25, 720920, 25, 720921, 26, 786432, 34, 786433, 35, 786434, 35, 786435, 35, 786436, 36, 786450, 34, 786451, 35, 786452, 35, 786453, 35, 786454, 35, 786455, 35, 786456, 35, 786457, 36 )
+script/script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 355, -54.5 )
+z/z = 2
+texture = ExtResource( 3 )
+
+[node name="Coins" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Coin" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 32, -16 )
+
+[node name="Coin1" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 48, -16 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 48, -48 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 64, -48 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 64, -64 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 160, -16 )
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 176, -16 )
+
+[node name="Coin7" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 192, -16 )
+
+[node name="Coin8" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 320, -16 )
+
+[node name="Coin9" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 336, -16 )
+
+[node name="Coin10" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 352, -16 )
+
+[node name="Coin11" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 368, -16 )
+
+[node name="Coin12" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 320, -48 )
+
+[node name="Coin13" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 336, -48 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Oneway Platform" parent="Platforms" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 48, -32 )
+
+[node name="Oneway Platform1" parent="Platforms" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 64, -32 )
+
+[node name="Oneway Platform2" parent="Platforms" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 32, -32 )
+
+[node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 64, -48 )
+
+[node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 48, -48 )
+
+[node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 64, -64 )
+
+[node name="Land" type="Node2D" parent="."]
+
+[node name="Land-platform" parent="Land" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 304, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Land-platform"]
+
+frame = 100
+
+[node name="Land-platform1" parent="Land" instance=ExtResource( 5 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 320, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Land-platform1"]
+
+frame = 101
+
+[node name="Land-platform2" parent="Land" instance=ExtResource( 5 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 336, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Land-platform2"]
+
+frame = 101
+
+[node name="Land-platform3" parent="Land" instance=ExtResource( 5 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 352, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Land-platform3"]
+
+frame = 101
+
+[node name="Land-platform4" parent="Land" instance=ExtResource( 5 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 368, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Land-platform4"]
+
+frame = 102
+
+[node name="Enemies" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 32, -48 )
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, -48 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 352, -80 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 384, -49 )
+
+
+[editable path="Land/Land-platform"]
+[editable path="Land/Land-platform1"]
+[editable path="Land/Land-platform2"]
+[editable path="Land/Land-platform3"]
+[editable path="Land/Land-platform4"]
