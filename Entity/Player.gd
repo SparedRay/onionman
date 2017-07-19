@@ -24,9 +24,11 @@ var floor_h_velocity = 0.0
 var enemy
 
 var current_score = 0
+var sound_node
 
 func _ready():
 	get_node("UI/Transition/Animation").play("In")
+	sound_node = get_node("Sound")
 	base_shape = get_shape(0)
 
 func update_score(pts, coin):
@@ -134,6 +136,7 @@ func _integrate_forces(s):
 			lv.y = -JUMP_VELOCITY
 			jumping = true
 			stopping_jump = false
+			sound_node.play("sfx_jump")
 		
 		# Revisar la direccino del sprite
 		if (lv.x < 0 and move_left):
@@ -190,4 +193,5 @@ func _integrate_forces(s):
 	s.set_linear_velocity(lv)
 	
 	if (get_pos().y > 800):
+		sound_node.play("fall_death")
 		_dying()

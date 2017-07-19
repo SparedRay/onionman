@@ -8,6 +8,7 @@ func _on_Coin_body_enter( body ):
 		get_node("Animation").play("Taken")
 		taken = true
 		body.update_score(50, true)
+		get_node("Sound").play("gold-4")
 
 func _on_Coin_area_enter (area):
 	pass

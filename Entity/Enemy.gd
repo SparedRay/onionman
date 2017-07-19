@@ -44,8 +44,10 @@ func _integrate_forces(s):
 					state = STATE_DYING
 					set_friction(1)
 					cc.update_score(200, false)
+					get_node("Sound").play("woosh-3")
 					break
 				elif (cc extends player_class):
+					cc.sound_node.play("death")
 					cc._dying()
 			
 			if (dp.x > 0.9):

@@ -1,23 +1,26 @@
-[gd_scene load_steps=34 format=1]
+[gd_scene load_steps=38 format=1]
 
 [ext_resource path="res://Entity/Player.gd" type="Script" id=1]
 [ext_resource path="res://UI/ThatBoy.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Entity/entity.png" type="Texture" id=3]
-[ext_resource path="res://UI/Touch/left.png" type="Texture" id=4]
-[ext_resource path="res://UI/Touch/right.png" type="Texture" id=5]
-[ext_resource path="res://UI/Touch/pause.png" type="Texture" id=6]
-[ext_resource path="res://UI/Pause.gd" type="Script" id=7]
-[ext_resource path="res://UI/m5x7.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://UI/Touch/jump.png" type="Texture" id=9]
-[ext_resource path="res://UI/hud.png" type="Texture" id=10]
-[ext_resource path="res://UI/CRTFrame.png" type="Texture" id=11]
+[ext_resource path="res://UI/Music/death.wav" type="Sample" id=4]
+[ext_resource path="res://UI/Music/fall_death.wav" type="Sample" id=5]
+[ext_resource path="res://UI/Music/sfx_jump.wav" type="Sample" id=6]
+[ext_resource path="res://UI/Touch/left.png" type="Texture" id=7]
+[ext_resource path="res://UI/Touch/right.png" type="Texture" id=8]
+[ext_resource path="res://UI/Touch/pause.png" type="Texture" id=9]
+[ext_resource path="res://UI/Pause.gd" type="Script" id=10]
+[ext_resource path="res://UI/m5x7.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://UI/Touch/jump.png" type="Texture" id=12]
+[ext_resource path="res://UI/hud.png" type="Texture" id=13]
+[ext_resource path="res://UI/CRTFrame.png" type="Texture" id=14]
 
 [sub_resource type="RayShape2D" id=1]
 
 custom_solver_bias = 0.0
 length = 16.5586
 
-[sub_resource type="ConvexPolygonShape2D" id=23]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -4, 6, 6, 6, 1, 13 )
@@ -182,28 +185,48 @@ tracks/0/keys = {
 "values": [ 9, 10 ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="SampleLibrary" id=9]
+
+samples/death = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+samples/fall_death = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 5 )
+}
+samples/sfx_jump = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 6 )
+}
+
+[sub_resource type="RectangleShape2D" id=10]
 
 custom_solver_bias = 0.0
 extents = Vector2( 7, 2 )
-
-[sub_resource type="DynamicFont" id=10]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=11]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 8 )
+font/font = ExtResource( 11 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="DynamicFont" id=12]
 
-resource/name = "Blink"
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 11 )
+
+[sub_resource type="Animation" id=13]
+
 length = 1.0
 loop = true
 step = 0.1
@@ -218,42 +241,42 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="DynamicFont" id=13]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 8 )
-
 [sub_resource type="DynamicFont" id=14]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 8 )
+font/font = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=15]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 8 )
+font/font = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=16]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 8 )
+font/font = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=17]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 8 )
+font/font = ExtResource( 11 )
 
-[sub_resource type="GDScript" id=18]
+[sub_resource type="DynamicFont" id=18]
+
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 11 )
+
+[sub_resource type="GDScript" id=19]
 
 script/source = "extends Timer
 
@@ -278,14 +301,14 @@ func _on_Timer_timeout():
 	get_parent().get_parent()._dying()
 "
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="DynamicFont" id=20]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 8 )
+font/font = ExtResource( 11 )
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=21]
 
 resource/name = "Text"
 length = 1.0
@@ -304,9 +327,8 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=22]
 
-resource/name = "In"
 length = 1.0
 loop = false
 step = 0.1
@@ -333,9 +355,8 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=23]
 
-resource/name = "Out"
 length = 1.0
 loop = false
 step = 0.1
@@ -368,7 +389,7 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.156829, 0, 0, 0.536035, 1, 7 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 23 )
+shapes/1/shape = SubResource( 2 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 collision/layers = 1
@@ -433,6 +454,17 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="Sound" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 9 )
+config/pitch_random = 0.0
+
 [node name="Camera" type="Camera2D" parent="."]
 
 anchor_mode = 1
@@ -469,6 +501,7 @@ trigger = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -478,7 +511,7 @@ scale = Vector2( 5, 5 )
 
 transform/pos = Vector2( 10, 80 )
 transform/scale = Vector2( 0.225, 0.225 )
-normal = ExtResource( 4 )
+normal = ExtResource( 7 )
 pressed = null
 bitmask = null
 shape = null
@@ -492,7 +525,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 40, 80 )
 transform/scale = Vector2( 0.225, 0.225 )
-normal = ExtResource( 5 )
+normal = ExtResource( 8 )
 pressed = null
 bitmask = null
 shape = null
@@ -508,7 +541,7 @@ process/pause_mode = 2
 editor/display_folded = true
 transform/pos = Vector2( 170, 10 )
 transform/scale = Vector2( 0.258333, 0.25 )
-normal = ExtResource( 6 )
+normal = ExtResource( 9 )
 pressed = null
 bitmask = null
 shape = null
@@ -517,7 +550,7 @@ shape_visible = true
 passby_press = false
 action = ""
 visibility_mode = 1
-script/script = ExtResource( 7 )
+script/script = ExtResource( 10 )
 
 [node name="Fill" type="ColorFrame" parent="UI/pause"]
 
@@ -542,7 +575,7 @@ z/z = 1
 normal = null
 pressed = null
 bitmask = null
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 shape_centered = true
 shape_visible = true
 passby_press = false
@@ -559,7 +592,7 @@ margin/left = -13.0
 margin/top = -6.0
 margin/right = 17.0
 margin/bottom = 7.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "RETRY"
 align = 1
@@ -581,7 +614,7 @@ margin/left = -350.0
 margin/top = 150.0
 margin/right = -312.0
 margin/bottom = 165.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "PAUSED"
 percent_visible = 1.0
@@ -593,7 +626,7 @@ max_lines_visible = -1
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Blink = SubResource( 12 )
+anims/Blink = SubResource( 13 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -603,7 +636,7 @@ autoplay = ""
 
 transform/pos = Vector2( 160, 70 )
 transform/scale = Vector2( 0.25, 0.25 )
-normal = ExtResource( 9 )
+normal = ExtResource( 12 )
 pressed = null
 bitmask = null
 shape = null
@@ -639,7 +672,7 @@ margin/left = 3.0
 margin/top = 3.0
 margin/right = 43.0
 margin/bottom = 16.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "COIN"
 align = 1
 valign = 1
@@ -667,7 +700,7 @@ margin/left = 6.0
 margin/top = 7.0
 margin/right = 16.0
 margin/bottom = 20.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 15 )
 text = "X"
 align = 1
 valign = 1
@@ -686,7 +719,7 @@ margin/left = 10.0
 margin/top = 7.0
 margin/right = 50.0
 margin/bottom = 20.0
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 text = "0000"
 percent_visible = 1.0
 lines_skipped = 0
@@ -715,7 +748,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 14.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 text = "SCORE"
 align = 1
 percent_visible = 1.0
@@ -733,7 +766,7 @@ margin/left = -2.0
 margin/top = 5.0
 margin/right = 46.0
 margin/bottom = 19.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 text = "00000000"
 align = 1
 valign = 2
@@ -748,12 +781,12 @@ process_mode = 1
 wait_time = 500.0
 one_shot = false
 autostart = false
-script/script = SubResource( 18 )
+script/script = SubResource( 19 )
 
 [node name="Clock" type="Sprite" parent="UI/Timer"]
 
 transform/pos = Vector2( 76, 18 )
-texture = ExtResource( 10 )
+texture = ExtResource( 13 )
 vframes = 2
 hframes = 10
 frame = 15
@@ -761,7 +794,7 @@ frame = 15
 [node name="Next" type="Sprite" parent="UI/Timer"]
 
 transform/pos = Vector2( 84, 18 )
-texture = ExtResource( 10 )
+texture = ExtResource( 13 )
 vframes = 2
 hframes = 10
 frame = 14
@@ -776,7 +809,7 @@ margin/left = 89.0
 margin/top = 10.0
 margin/right = 119.0
 margin/bottom = 23.0
-custom_fonts/font = SubResource( 19 )
+custom_fonts/font = SubResource( 20 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "000"
 percent_visible = 1.0
@@ -788,7 +821,7 @@ max_lines_visible = -1
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Text = SubResource( 22 )
+anims/Text = SubResource( 21 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -798,7 +831,7 @@ autoplay = ""
 
 transform/pos = Vector2( 96, 54 )
 transform/scale = Vector2( 0.177449, 0.133005 )
-texture = ExtResource( 11 )
+texture = ExtResource( 14 )
 
 [node name="Transition" type="Node2D" parent="UI"]
 
@@ -942,8 +975,8 @@ color = Color( 0, 0, 0, 1 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/In = SubResource( 20 )
-anims/Out = SubResource( 21 )
+anims/In = SubResource( 22 )
+anims/Out = SubResource( 23 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://Entity/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Entity/entity.png" type="Texture" id=2]
 [ext_resource path="res://UI/scores.png" type="Texture" id=3]
+[ext_resource path="res://UI/Music/woosh-3.wav" type="Sample" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -107,6 +108,15 @@ tracks/0/keys = {
 "values": [ 56, 57 ]
 }
 
+[sub_resource type="SampleLibrary" id=4]
+
+samples/woosh-3 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+
 [node name="Enemy" type="RigidBody2D"]
 
 input/pickable = false
@@ -150,22 +160,22 @@ transform/pos = Vector2( 16, 16 )
 texture = ExtResource( 2 )
 vframes = 14
 hframes = 8
-frame = 58
+frame = 57
 
 [node name="Smoke" type="Sprite" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 16, 26 )
 texture = ExtResource( 2 )
 vframes = 14
 hframes = 8
-frame = 103
+frame = 98
 
 [node name="Score" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 16, 26 )
 texture = ExtResource( 3 )
-offset = Vector2( 10, -20 )
 hframes = 9
 frame = 1
 
@@ -205,5 +215,16 @@ enabled = true
 cast_to = Vector2( 0, 45 )
 layer_mask = 1
 type_mask = 15
+
+[node name="Sound" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 4 )
+config/pitch_random = 0.0
 
 
