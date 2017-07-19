@@ -7,6 +7,7 @@ var credits_index = 0
 const credits = [
 	"Programming by SparedRay",
 	"Characters thanks to GrafxKid",
+	"Music made by ViRIX and Crateboy",
 	"Game made for OGA Jam"
 ]
 
