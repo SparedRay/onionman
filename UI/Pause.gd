@@ -4,6 +4,7 @@ var paused = false
 var fill
 var continueButton
 var retryButton
+var transition
 
 func _pause():
 	if (not paused):
@@ -31,15 +32,16 @@ func _ready():
 	fill = get_node("Fill")
 	continueButton = get_node("ContinueButton")
 	retryButton = get_node("RetryButton")
+	transition = get_parent().get_node("Transition/Animation")
 
 func _input(event):
 	if (event.is_action_pressed("pause")):
 		_pause()
 	elif (event.is_action_pressed("reset")):
-		_retry()
+		transition.play("Out")
 
 func _on_pause_pressed():
 	_pause()
 
 func _on_RetryButton_pressed():
-	_retry()
+	transition.play("Out")

@@ -39,7 +39,7 @@ func _integrate_forces(s):
 			var dp = s.get_contact_local_normal(x)
 			
 			if (cc):
-				if (cc extends player_class and dp.y > 0):
+				if (cc extends player_class and dp.y > 0.8):
 					set_mode(MODE_RIGID)
 					state = STATE_DYING
 					set_friction(1)

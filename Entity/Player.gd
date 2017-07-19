@@ -26,6 +26,7 @@ var enemy
 var current_score = 0
 
 func _ready():
+	get_node("UI/Transition/Animation").play("In")
 	base_shape = get_shape(0)
 
 func update_score(pts, coin):
@@ -45,11 +46,13 @@ func _die():
 	# queue_free()
 
 func _dying():
-	get_node("UI/Timer").stop()
+	if (get_node("UI/Timer").time_left > 0):
+		get_node("UI/Timer").stop()
 	clear_shapes()
 	set_mode(MODE_STATIC)
 	anim = "Dying"
 	get_node("Anim").play(anim)
+	print("Playing: " + String(get_node("Anim").is_playing()))
 
 func _revive():
 	get_node("UI/Timer").start()
@@ -189,3 +192,11 @@ func _integrate_forces(s):
 	
 	if (get_pos().y > 800):
 		_dying()
+
+func _on_Timer_timeout():
+	get_node("UI/Timer").stop()
+#	clear_shapes()
+#	set_mode(MODE_STATIC)
+#	anim = "Dying"
+#	get_node("Anim").play(anim)
+	print("Playing: " + String(get_node("Anim").is_playing()))

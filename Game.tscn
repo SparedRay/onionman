@@ -13,7 +13,7 @@
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-transform/pos = Vector2( 50, 670 )
+transform/pos = Vector2( 50, 686 )
 z/z = 1
 contact_monitor = true
 
