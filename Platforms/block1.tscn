@@ -27,8 +27,6 @@ script/script = ExtResource( 2 )
 
 [node name="Water" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="Water" parent="Water" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 48, 16 )
@@ -46,7 +44,7 @@ size_flags/vertical = 2
 margin/left = 48.0
 margin/top = 32.0
 margin/right = 80.0
-margin/bottom = 144.0
+margin/bottom = 304.0
 color = Color( 0.121569, 0.584314, 0.882353, 1 )
 
 [node name="Coins" type="Node2D" parent="."]
