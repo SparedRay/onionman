@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
+[ext_resource path="res://Platforms/Moving Platform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://TileSet/Tree.png" type="Texture" id=6]
+
+[node name="TileMap" type="TileMap"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 32
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -131057, 16, -131056, 17, -131055, 17, -131054, 18, -131040, 20, -131039, 21, -131038, 21, -131037, 22, -65534, 19, -65532, 23, -65530, 19, -65504, 24, -65503, 25, -65502, 25, -65501, 26, 1, 20, 2, 21, 3, 21, 4, 21, 5, 21, 6, 21, 7, 22, 32, 24, 33, 25, 34, 25, 35, 26, 65537, 24, 65538, 25, 65539, 25, 65540, 25, 65541, 25, 65542, 25, 65543, 26, 65568, 24, 65569, 25, 65570, 25, 65571, 26, 131073, 24, 131074, 25, 131075, 25, 131076, 25, 131077, 25, 131078, 25, 131079, 26, 131104, 24, 131105, 25, 131106, 25, 131107, 26, 196609, 24, 196610, 25, 196611, 25, 196612, 25, 196613, 25, 196614, 25, 196615, 26, 196640, 24, 196641, 25, 196642, 25, 196643, 26, 262145, 24, 262146, 25, 262147, 25, 262148, 25, 262149, 25, 262150, 25, 262151, 26, 262176, 24, 262177, 25, 262178, 25, 262179, 26, 327681, 24, 327682, 25, 327683, 25, 327684, 25, 327685, 25, 327686, 25, 327687, 26, 327712, 24, 327713, 25, 327714, 25, 327715, 26, 393217, 24, 393218, 25, 393219, 25, 393220, 25, 393221, 25, 393222, 25, 393223, 26, 393248, 24, 393249, 25, 393250, 25, 393251, 26, 458753, 24, 458754, 25, 458755, 25, 458756, 25, 458757, 25, 458758, 25, 458759, 26, 458784, 24, 458785, 25, 458786, 25, 458787, 26, 524289, 24, 524290, 25, 524291, 25, 524292, 25, 524293, 25, 524294, 25, 524295, 26, 524320, 24, 524321, 25, 524322, 25, 524323, 26, 589825, 24, 589826, 25, 589827, 25, 589828, 25, 589829, 25, 589830, 25, 589831, 26, 589856, 24, 589857, 25, 589858, 25, 589859, 26, 655361, 24, 655362, 25, 655363, 25, 655364, 25, 655365, 25, 655366, 25, 655367, 26, 655392, 24, 655393, 25, 655394, 25, 655395, 26, 720897, 24, 720898, 25, 720899, 25, 720900, 25, 720901, 25, 720902, 25, 720903, 26, 720928, 24, 720929, 25, 720930, 25, 720931, 26, 786433, 24, 786434, 25, 786435, 25, 786436, 25, 786437, 25, 786438, 25, 786439, 26, 786464, 24, 786465, 25, 786466, 25, 786467, 26, 851969, 24, 851970, 25, 851971, 25, 851972, 25, 851973, 25, 851974, 25, 851975, 26, 852000, 24, 852001, 25, 852002, 25, 852003, 26, 917505, 24, 917506, 25, 917507, 25, 917508, 25, 917509, 25, 917510, 25, 917511, 26, 917536, 24, 917537, 25, 917538, 25, 917539, 26, 983041, 24, 983042, 25, 983043, 25, 983044, 25, 983045, 25, 983046, 25, 983047, 26, 983072, 24, 983073, 25, 983074, 25, 983075, 26, 1048577, 24, 1048578, 25, 1048579, 25, 1048580, 25, 1048581, 25, 1048582, 25, 1048583, 26, 1048608, 24, 1048609, 25, 1048610, 25, 1048611, 26, 1114113, 24, 1114114, 25, 1114115, 25, 1114116, 25, 1114117, 25, 1114118, 25, 1114119, 26, 1114144, 24, 1114145, 25, 1114146, 25, 1114147, 26, 1179649, 24, 1179650, 25, 1179651, 25, 1179652, 25, 1179653, 25, 1179654, 25, 1179655, 26, 1179680, 24, 1179681, 25, 1179682, 25, 1179683, 26, 1245185, 24, 1245186, 25, 1245187, 25, 1245188, 25, 1245189, 25, 1245190, 25, 1245191, 26, 1245216, 24, 1245217, 25, 1245218, 25, 1245219, 26, 1310721, 34, 1310722, 35, 1310723, 35, 1310724, 35, 1310725, 35, 1310726, 35, 1310727, 36, 1310752, 34, 1310753, 36, 1310754, 36, 1310755, 35 )
+script/script = ExtResource( 2 )
+
+[node name="MovingPlatform" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 192, -160 )
+motion = Vector2( 0, 140 )
+cycle = 5.0
+
+[node name="MovingPlatform1" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 464, -64 )
+motion = Vector2( -100, 0 )
+cycle = 5.0
+
+[node name="Coins" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Coin" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 32, -16 )
+
+[node name="Coin1" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 48, -16 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 96, -16 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 112, -16 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 256, -48 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 272, -48 )
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 288, -48 )
+
+[node name="Coin7" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 528, -48 )
+
+[node name="Coin8" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 544, -48 )
+
+[node name="Coin9" parent="Coins" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 560, -48 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 32, -32 )
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 80, -32 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 240, -64 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 256, -64 )
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 528, -64 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 544, -54.5 )
+texture = ExtResource( 6 )
+
+

@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Platforms/MovingPlatform.gd" type="Script" id=1]
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, 0, 32, 0, 32, 16, -32, 16 )
+
+[node name="MovingPlatform" type="Node2D"]
+
+script/script = ExtResource( 1 )
+motion = Vector2( 0, 0 )
+cycle = 1.0
+
+[node name="Platform" type="RigidBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 3
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+
+[node name="TileMap" type="TileMap" parent="Platform"]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 32
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 65534, 16, 65535, 17, 0, 17, 1, 18 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform"]
+
+build_mode = 0
+polygon = Vector2Array( -32, 0, 32, 0, 32, 16, -32, 16 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+

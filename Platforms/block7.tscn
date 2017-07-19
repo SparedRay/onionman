@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
+[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TileSet/Tree.png" type="Texture" id=5]
+
+[node name="TileMap" type="TileMap"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 32
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -196595, 19, -196593, 23, -131069, 28, -131068, 30, -131067, 28, -131063, 19, -131062, 20, -131061, 21, -131060, 21, -131059, 21, -131058, 21, -131057, 22, -65534, 19, -65533, 19, -65527, 33, -65526, 24, -65525, 25, -65524, 25, -65523, 25, -65522, 25, -65521, 26, 1, 20, 2, 21, 3, 21, 4, 21, 5, 21, 6, 21, 7, 21, 8, 22, 9, 37, 10, 24, 11, 25, 12, 25, 13, 25, 14, 25, 15, 26, 65537, 24, 65538, 25, 65539, 25, 65540, 25, 65541, 25, 65542, 25, 65543, 25, 65544, 26, 65545, 37, 65546, 24, 65547, 25, 65548, 25, 65549, 25, 65550, 25, 65551, 26, 131073, 24, 131074, 25, 131075, 25, 131076, 25, 131077, 25, 131078, 25, 131079, 25, 131080, 26, 131081, 37, 131082, 24, 131083, 25, 131084, 25, 131085, 25, 131086, 25, 131087, 26, 196609, 24, 196610, 25, 196611, 25, 196612, 25, 196613, 25, 196614, 25, 196615, 25, 196616, 26, 196617, 37, 196618, 24, 196619, 25, 196620, 25, 196621, 25, 196622, 25, 196623, 26, 262145, 24, 262146, 25, 262147, 25, 262148, 25, 262149, 25, 262150, 25, 262151, 25, 262152, 26, 262153, 37, 262154, 24, 262155, 25, 262156, 25, 262157, 25, 262158, 25, 262159, 26, 327681, 24, 327682, 25, 327683, 25, 327684, 25, 327685, 25, 327686, 25, 327687, 25, 327688, 26, 327689, 37, 327690, 24, 327691, 25, 327692, 25, 327693, 25, 327694, 25, 327695, 26, 393217, 24, 393218, 25, 393219, 25, 393220, 25, 393221, 25, 393222, 25, 393223, 25, 393224, 26, 393225, 37, 393226, 24, 393227, 25, 393228, 25, 393229, 25, 393230, 25, 393231, 26, 458753, 24, 458754, 25, 458755, 25, 458756, 25, 458757, 25, 458758, 25, 458759, 25, 458760, 26, 458761, 37, 458762, 24, 458763, 25, 458764, 25, 458765, 25, 458766, 25, 458767, 26, 524289, 24, 524290, 25, 524291, 25, 524292, 25, 524293, 25, 524294, 25, 524295, 25, 524296, 26, 524297, 37, 524298, 24, 524299, 25, 524300, 25, 524301, 25, 524302, 25, 524303, 26, 589825, 24, 589826, 25, 589827, 25, 589828, 25, 589829, 25, 589830, 25, 589831, 25, 589832, 26, 589833, 37, 589834, 24, 589835, 25, 589836, 25, 589837, 25, 589838, 25, 589839, 26, 655361, 24, 655362, 25, 655363, 25, 655364, 25, 655365, 25, 655366, 25, 655367, 25, 655368, 26, 655369, 37, 655370, 24, 655371, 25, 655372, 25, 655373, 25, 655374, 25, 655375, 26, 720897, 24, 720898, 25, 720899, 25, 720900, 25, 720901, 25, 720902, 25, 720903, 25, 720904, 26, 720905, 37, 720906, 24, 720907, 25, 720908, 25, 720909, 25, 720910, 25, 720911, 26, 786433, 24, 786434, 25, 786435, 25, 786436, 25, 786437, 25, 786438, 25, 786439, 25, 786440, 26, 786441, 37, 786442, 24, 786443, 25, 786444, 25, 786445, 25, 786446, 25, 786447, 26, 851969, 24, 851970, 25, 851971, 25, 851972, 25, 851973, 25, 851974, 25, 851975, 25, 851976, 26, 851977, 37, 851978, 24, 851979, 25, 851980, 25, 851981, 25, 851982, 25, 851983, 26, 917505, 24, 917506, 25, 917507, 25, 917508, 25, 917509, 25, 917510, 25, 917511, 25, 917512, 26, 917513, 37, 917514, 24, 917515, 25, 917516, 25, 917517, 25, 917518, 25, 917519, 26, 983041, 24, 983042, 25, 983043, 25, 983044, 25, 983045, 25, 983046, 25, 983047, 25, 983048, 26, 983049, 37, 983050, 24, 983051, 25, 983052, 25, 983053, 25, 983054, 25, 983055, 26, 1048577, 34, 1048578, 35, 1048579, 35, 1048580, 35, 1048581, 35, 1048582, 35, 1048583, 35, 1048584, 36, 1048585, 37, 1048586, 34, 1048587, 35, 1048588, 35, 1048589, 35, 1048590, 35, 1048591, 36 )
+script/script = ExtResource( 2 )
+
+[node name="Coins" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Coin" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 32, -16 )
+
+[node name="Coin1" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 48, -16 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 96, -16 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 112, -16 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 64, -48 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 80, -48 )
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 96, -48 )
+
+[node name="Coin7" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 48, -48 )
+
+[node name="Coin8" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 176, -48 )
+
+[node name="Coin9" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 192, -48 )
+
+[node name="Coin10" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 208, -48 )
+
+[node name="Coin11" parent="Coins" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 208, -48 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 64, -32 )
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 64, -64 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 208, -64 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 180, -54.5 )
+z/z = -1
+texture = ExtResource( 5 )
+
+

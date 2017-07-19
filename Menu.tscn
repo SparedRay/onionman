@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=1]
+[gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://Menu.gd" type="Script" id=1]
 [ext_resource path="res://UI/OnionMan.png" type="Texture" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://Parallax/Far.png" type="Texture" id=5]
 [ext_resource path="res://Parallax/Near.png" type="Texture" id=6]
 [ext_resource path="res://UI/m5x7.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://UI/CRTFrame.png" type="Texture" id=8]
-[ext_resource path="res://UI/Music/Busy Day At The Market-LOOP.ogg" type="AudioStream" id=9]
+[ext_resource path="res://UI/Music/sfx_select.wav" type="Sample" id=8]
+[ext_resource path="res://UI/CRTFrame.png" type="Texture" id=9]
+[ext_resource path="res://UI/Music/Busy Day At The Market-LOOP.ogg" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 
@@ -130,7 +131,16 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="SampleLibrary" id=7]
+
+samples/sfx_select = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 8 )
+}
+
+[sub_resource type="Animation" id=8]
 
 length = 1.0
 loop = false
@@ -162,7 +172,7 @@ tracks/1/keys = {
 
 script/script = ExtResource( 1 )
 
-[node name="Ttile" type="Sprite" parent="."]
+[node name="Title" type="Sprite" parent="."]
 
 transform/pos = Vector2( 480, 260 )
 z/z = 1
@@ -375,12 +385,23 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = "Blink"
 
+[node name="Sound" type="SamplePlayer2D" parent="Button"]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 7 )
+config/pitch_random = 0.0
+
 [node name="Fade" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Fade = SubResource( 7 )
+anims/Fade = SubResource( 8 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -503,12 +524,12 @@ color = Color( 0, 0, 0, 1 )
 [node name="CRTFrame" type="Sprite" parent="."]
 
 transform/scale = Vector2( 0.887246, 0.665025 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 centered = false
 
 [node name="SamplePlayer" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 9 )
+stream/stream = ExtResource( 10 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0

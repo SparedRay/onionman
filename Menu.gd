@@ -5,7 +5,7 @@ var credits_text
 var credits_index = 0
 
 const credits = [
-	"Programming by SparedRay",
+	"Programmed by SparedRay",
 	"Characters thanks to GrafxKid",
 	"Music made by ViRIX and Crateboy",
 	"Game made for OGA Jam"
@@ -20,6 +20,7 @@ func _process(delta):
 		scene_moved = true
 		get_node("Button/Blink").play("Pressed")
 		get_node("Fade").play("Fade")
+		get_node("Button/Sound").play("sfx_select")
 
 func _update_credits():
 	credits_text.set_text(credits[credits_index])

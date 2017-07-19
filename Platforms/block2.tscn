@@ -95,36 +95,61 @@ transform/pos = Vector2( 336, -48 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="Oneway Platform" parent="Platforms" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 48, -32 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform"]
+
+frame = 53
 
 [node name="Oneway Platform1" parent="Platforms" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 64, -32 )
 
+[node name="Sprite" parent="Platforms/Oneway Platform1"]
+
+frame = 51
+
 [node name="Oneway Platform2" parent="Platforms" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 32, -32 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform2"]
+
+frame = 51
 
 [node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 64, -48 )
 
+[node name="Sprite" parent="Platforms/Oneway Platform3"]
+
+frame = 53
+
 [node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 48, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform4"]
+
+frame = 53
 
 [node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 64, -64 )
 
+[node name="Sprite" parent="Platforms/Oneway Platform5"]
+
+frame = 51
+
 [node name="Land" type="Node2D" parent="."]
+
+editor/display_folded = true
 
 [node name="Land-platform" parent="Land" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 304, -32 )
 z/z = -1
 
@@ -193,6 +218,12 @@ transform/pos = Vector2( 352, -80 )
 transform/pos = Vector2( 384, -49 )
 
 
+[editable path="Platforms/Oneway Platform"]
+[editable path="Platforms/Oneway Platform1"]
+[editable path="Platforms/Oneway Platform2"]
+[editable path="Platforms/Oneway Platform3"]
+[editable path="Platforms/Oneway Platform4"]
+[editable path="Platforms/Oneway Platform5"]
 [editable path="Land/Land-platform"]
 [editable path="Land/Land-platform1"]
 [editable path="Land/Land-platform2"]

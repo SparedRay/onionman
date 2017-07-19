@@ -501,7 +501,6 @@ trigger = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -774,6 +773,23 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="Frame" type="Node2D" parent="UI"]
+
+editor/display_folded = true
+z/z = -2
+
+[node name="ColorFrame" type="ColorFrame" parent="UI/Frame"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 192.0
+margin/bottom = 13.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Timer" type="Timer" parent="UI"]
 
 editor/display_folded = true
@@ -835,6 +851,7 @@ texture = ExtResource( 14 )
 
 [node name="Transition" type="Node2D" parent="UI"]
 
+editor/display_folded = true
 transform/pos = Vector2( -25, 0 )
 z/z = 3
 

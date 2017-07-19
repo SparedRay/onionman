@@ -9,7 +9,10 @@ var blocks = [
 	preload("res://Platforms/block3.tscn"),
 	preload("res://Platforms/block4.tscn"),
 	preload("res://Platforms/block5.tscn"),
-	preload("res://Platforms/block6.tscn")
+	preload("res://Platforms/block6.tscn"),
+	preload("res://Platforms/block7.tscn"),
+	preload("res://Platforms/block8.tscn"),
+	preload("res://Platforms/block9.tscn")
 ]
 var last_block_used = null
 var last_block_x = 0.0
