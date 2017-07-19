@@ -7,7 +7,6 @@ func _ready():
 
 func _process(delta):
 	if (Input.is_action_pressed("start_game") and not scene_moved):
-		print("Pulsado")
 		scene_moved = true
 		get_node("Button/Blink").play("Pressed")
 		get_node("Fade").play("Fade")

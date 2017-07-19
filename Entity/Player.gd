@@ -46,13 +46,12 @@ func _die():
 	# queue_free()
 
 func _dying():
-	if (get_node("UI/Timer").time_left > 0):
+	if (get_node("UI/Timer").time_left > 0.1):
 		get_node("UI/Timer").stop()
 	clear_shapes()
 	set_mode(MODE_STATIC)
 	anim = "Dying"
 	get_node("Anim").play(anim)
-	print("Playing: " + String(get_node("Anim").is_playing()))
 
 func _revive():
 	get_node("UI/Timer").start()
@@ -192,11 +191,3 @@ func _integrate_forces(s):
 	
 	if (get_pos().y > 800):
 		_dying()
-
-func _on_Timer_timeout():
-	get_node("UI/Timer").stop()
-#	clear_shapes()
-#	set_mode(MODE_STATIC)
-#	anim = "Dying"
-#	get_node("Anim").play(anim)
-	print("Playing: " + String(get_node("Anim").is_playing()))

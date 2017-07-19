@@ -25,7 +25,6 @@ func _pause():
 		get_tree().set_pause(paused)
 
 func _retry():
-	print("Retry")
 	get_tree().change_scene("res://Game.tscn")
 
 func _ready():
