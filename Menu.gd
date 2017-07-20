@@ -29,4 +29,4 @@ func _update_credits():
 		credits_index = 0
 
 func _move_scene():
-	get_tree().change_scene("res://Game.tscn")
+	get_tree().change_scene("res://Story/Intro.tscn")
