@@ -5,14 +5,14 @@ extends Node
 # var b = "textvar"
 var blocks = [
 	preload("res://Platforms/block1.tscn"),
-	preload("res://Platforms/block2.tscn"),
+#	preload("res://Platforms/block2.tscn"),
 	preload("res://Platforms/block3.tscn"),
-	preload("res://Platforms/block4.tscn"),
-	preload("res://Platforms/block5.tscn"),
-	preload("res://Platforms/block6.tscn"),
-	preload("res://Platforms/block7.tscn"),
-	preload("res://Platforms/block8.tscn"),
-	preload("res://Platforms/block9.tscn")
+#	preload("res://Platforms/block4.tscn"),
+#	preload("res://Platforms/block5.tscn"),
+#	preload("res://Platforms/block6.tscn"),
+#	preload("res://Platforms/block7.tscn"),
+#	preload("res://Platforms/block8.tscn"),
+#	preload("res://Platforms/block9.tscn")
 ]
 var last_block_used = null
 var last_block_x = 0.0
@@ -25,7 +25,7 @@ func _ready():
 	var size = tilemap.get_used_rect()
 	last_block_x = size.size.x*tilemap.get_cell_size().x
 	
-	for b in range(10):
+	for b in range(1):
 		randomize()
 		var rndGap = floor(rand_range(0, 5))*tilemap.get_cell_size().x
 		var rndBlock = floor(rand_range(0, blocks.size()))
@@ -41,6 +41,14 @@ func _ready():
 		get_node(".").add_child(new_block)
 		last_block_x = new_x + new_block.get_used_rect().size.x*tilemap.get_cell_size().x
 	
+	# Agregando nivel del boss
+	randomize()
+	var rndGap = floor(rand_range(0, 5))*tilemap.get_cell_size().x
+	var block = preload("res://Platforms/BossFight.tscn")
+	var new_block = block.instance()
+	var new_x = last_block_x + rndGap
+	new_block.set_pos(Vector2(new_x, INIT_Y))
+	get_node(".").add_child(new_block)
 	# print("Parent: " + String(size))
 	#for c in get_node(".").get_children():
 	#	var s = c.get_used_rect()

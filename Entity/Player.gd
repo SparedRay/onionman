@@ -9,13 +9,13 @@ var jumping = false
 var stopping_jump = false
 var stop_jumping = false
 
-var RUN_ACCEL = 800.0
-var RUN_DEACCEL = 800.0
-var RUN_MAX_VELOCITY = 200.0
-var AIR_ACCEL = 200.0
-var AIR_DEACCEL = 250.0
+var RUN_ACCEL = 3000.0
+var RUN_DEACCEL = 3000.0
+var RUN_MAX_VELOCITY = 180.0
+var AIR_ACCEL = 2000.0
+var AIR_DEACCEL = 2500.0
 var JUMP_VELOCITY = 260
-var STOP_JUMP_FORCE = 900.0
+var STOP_JUMP_FORCE = 950.0
 
 var MAX_FLOOR_AIRBONE_TIME = 0.15
 var airbone_time = 1e20

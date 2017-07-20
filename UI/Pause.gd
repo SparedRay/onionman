@@ -25,7 +25,7 @@ func _pause():
 		get_tree().set_pause(paused)
 
 func _retry():
-	get_tree().change_scene("res://Game.tscn")
+	get_tree().reload_current_scene()
 
 func _ready():
 	fill = get_node("Fill")

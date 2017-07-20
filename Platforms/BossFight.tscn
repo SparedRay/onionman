@@ -1,0 +1,196 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://TileSet/Water.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=3]
+
+[node name="BossFight" type="TileMap"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 32
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -720852, 10, -655316, 10, -589780, 10, -524244, 10, -458726, 10, -458708, 10, -393191, 10, -393190, 10, -393172, 10, -327656, 10, -327655, 10, -327654, 10, -327636, 10, -262121, 10, -262120, 10, -262119, 10, -262118, 10, -262100, 10, -196586, 10, -196585, 10, -196584, 10, -196583, 10, -196582, 10, -196564, 10, -131051, 10, -131050, 10, -131049, 10, -131048, 10, -131047, 10, -131046, 10, -131028, 10, -65536, 19, -65516, 10, -65515, 10, -65514, 10, -65513, 10, -65512, 10, -65511, 10, -65510, 10, -65509, 10, -65508, 10, -65507, 10, -65506, 10, -65505, 10, -65504, 10, -65503, 10, -65502, 10, -65501, 10, -65500, 10, -65499, 10, -65498, 10, -65497, 10, -65496, 10, -65495, 10, -65494, 10, -65493, 10, -65492, 10, 0, 33, 1, 27, 2, 27, 3, 27, 4, 27, 5, 27, 6, 27, 7, 27, 8, 27, 9, 27, 10, 27, 11, 27, 12, 27, 13, 27, 14, 27, 15, 27, 16, 27, 17, 27, 18, 10, 19, 10, 20, 10, 21, 10, 22, 10, 23, 10, 24, 10, 25, 10, 26, 10, 27, 10, 28, 10, 29, 10, 30, 10, 31, 10, 32, 10, 33, 10, 34, 10, 35, 10, 36, 10, 37, 10, 38, 10, 39, 10, 40, 10, 41, 10, 42, 10, 43, 10, 44, 10, 65536, 37, 65554, 10, 65555, 10, 65556, 10, 65557, 10, 65558, 10, 65559, 10, 65560, 10, 65561, 10, 65562, 10, 65563, 10, 65564, 10, 65565, 10, 65566, 10, 65567, 10, 65568, 10, 65569, 10, 65570, 10, 65571, 10, 65572, 10, 65573, 10, 65574, 10, 65575, 10, 65576, 10, 65577, 10, 65578, 10, 65579, 10, 65580, 10, 131072, 37, 131090, 10, 131091, 10, 131092, 10, 131093, 10, 131094, 10, 131095, 10, 131096, 10, 131097, 10, 131098, 10, 131099, 10, 131100, 10, 131101, 10, 131102, 10, 131103, 10, 131104, 10, 131105, 10, 131106, 10, 131107, 10, 131108, 10, 131109, 10, 131110, 10, 131111, 10, 131112, 10, 131113, 10, 131114, 10, 131115, 10, 131116, 10, 196608, 37, 196626, 10, 196627, 10, 196628, 10, 196629, 10, 196630, 10, 196631, 10, 196632, 10, 196633, 10, 196634, 10, 196635, 10, 196636, 10, 196637, 10, 196638, 10, 196639, 10, 196640, 10, 196641, 10, 196642, 10, 196643, 10, 196644, 10, 196645, 10, 196646, 10, 196647, 10, 196648, 10, 196649, 10, 196650, 10, 196651, 10, 196652, 10, 262144, 37, 262162, 10, 262163, 10, 262164, 10, 262165, 10, 262166, 10, 262167, 10, 262168, 10, 262169, 10, 262170, 10, 262171, 10, 262172, 10, 262173, 10, 262174, 10, 262175, 10, 262176, 10, 262177, 10, 262178, 10, 262179, 10, 262180, 10, 262181, 10, 262182, 10, 262183, 10, 262184, 10, 262185, 10, 262186, 10, 262187, 10, 262188, 10, 327680, 37, 327698, 10, 327699, 10, 327700, 10, 327701, 10, 327702, 10, 327703, 10, 327704, 10, 327705, 10, 327706, 10, 327707, 10, 327708, 10, 327709, 10, 327710, 10, 327711, 10, 327712, 10, 327713, 10, 327714, 10, 327715, 10, 327716, 10, 327717, 10, 327718, 10, 327719, 10, 327720, 10, 327721, 10, 327722, 10, 327723, 10, 327724, 10, 393216, 37, 393234, 10, 393235, 10, 393236, 10, 393237, 10, 393238, 10, 393239, 10, 393240, 10, 393241, 10, 393242, 10, 393243, 10, 393244, 10, 393245, 10, 393246, 10, 393247, 10, 393248, 10, 393249, 10, 393250, 10, 393251, 10, 393252, 10, 393253, 10, 393254, 10, 393255, 10, 393256, 10, 393257, 10, 393258, 10, 393259, 10, 393260, 10, 458752, 37, 458770, 10, 458771, 10, 458772, 10, 458773, 10, 458774, 10, 458775, 10, 458776, 10, 458777, 10, 458778, 10, 458779, 10, 458780, 10, 458781, 10, 458782, 10, 458783, 10, 458784, 10, 458785, 10, 458786, 10, 458787, 10, 458788, 10, 458789, 10, 458790, 10, 458791, 10, 458792, 10, 458793, 10, 458794, 10, 458795, 10, 458796, 10, 524288, 37, 524306, 10, 524307, 10, 524308, 10, 524309, 10, 524310, 10, 524311, 10, 524312, 10, 524313, 10, 524314, 10, 524315, 10, 524316, 10, 524317, 10, 524318, 10, 524319, 10, 524320, 10, 524321, 10, 524322, 10, 524323, 10, 524324, 10, 524325, 10, 524326, 10, 524327, 10, 524328, 10, 524329, 10, 524330, 10, 524331, 10, 524332, 10, 589824, 37, 589842, 10, 589843, 10, 589844, 10, 589845, 10, 589846, 10, 589847, 10, 589848, 10, 589849, 10, 589850, 10, 589851, 10, 589852, 10, 589853, 10, 589854, 10, 589855, 10, 589856, 10, 589857, 10, 589858, 10, 589859, 10, 589860, 10, 589861, 10, 589862, 10, 589863, 10, 589864, 10, 589865, 10, 589866, 10, 589867, 10, 589868, 10, 655360, 37, 655378, 10, 655379, 10, 655380, 10, 655381, 10, 655382, 10, 655383, 10, 655384, 10, 655385, 10, 655386, 10, 655387, 10, 655388, 10, 655389, 10, 655390, 10, 655391, 10, 655392, 10, 655393, 10, 655394, 10, 655395, 10, 655396, 10, 655397, 10, 655398, 10, 655399, 10, 655400, 10, 655401, 10, 655402, 10, 655403, 10, 655404, 10, 720896, 37, 720914, 10, 720915, 10, 720916, 10, 720917, 10, 720918, 10, 720919, 10, 720920, 10, 720921, 10, 720922, 10, 720923, 10, 720924, 10, 720925, 10, 720926, 10, 720927, 10, 720928, 10, 720929, 10, 720930, 10, 720931, 10, 720932, 10, 720933, 10, 720934, 10, 720935, 10, 720936, 10, 720937, 10, 720938, 10, 720939, 10, 720940, 10, 786432, 37, 786450, 10, 786451, 10, 786452, 10, 786453, 10, 786454, 10, 786455, 10, 786456, 10, 786457, 10, 786458, 10, 851968, 37, 851986, 10, 851987, 10, 851988, 10, 851989, 10, 851990, 10, 851991, 10, 851992, 10, 851993, 10, 851994, 10, 917504, 37, 917522, 10, 917523, 10, 917524, 10, 917525, 10, 917526, 10, 917527, 10, 917528, 10, 917529, 10, 917530, 10, 983040, 37, 983058, 10, 983059, 10, 983060, 10, 983061, 10, 983062, 10, 983063, 10, 983064, 10, 983065, 10, 983066, 10, 1048576, 37, 1048594, 10, 1048595, 10, 1048596, 10, 1048597, 10, 1048598, 10, 1048599, 10, 1048600, 10, 1048601, 10, 1048602, 10, 1114112, 37, 1179648, 37, 1245184, 37, 1310720, 37, 1376256, 37 )
+
+[node name="Water" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 0, 16 )
+
+[node name="Water" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 16, 0 )
+
+[node name="Water1" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 32, 0 )
+
+[node name="Water2" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 48, 0 )
+
+[node name="Water3" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 64, 0 )
+
+[node name="Water4" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 80, 0 )
+
+[node name="Water5" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 96, 0 )
+
+[node name="Water6" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 112, 0 )
+
+[node name="Water7" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 128, 0 )
+
+[node name="Water8" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 144, 0 )
+
+[node name="Water9" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 160, 0 )
+
+[node name="Water10" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 176, 0 )
+
+[node name="Water11" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 192, 0 )
+
+[node name="Water12" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 208, 0 )
+
+[node name="Water13" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 224, 0 )
+
+[node name="Water14" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 240, 0 )
+
+[node name="Water15" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 256, 0 )
+
+[node name="Water16" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 272, 0 )
+
+[node name="Water17" parent="Water" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 272, 0 )
+
+[node name="Fill" type="ColorFrame" parent="Water"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 16.0
+margin/top = 16.0
+margin/right = 288.0
+margin/bottom = 256.0
+color = Color( 0.121569, 0.584314, 0.882353, 1 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Oneway Platform" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 464, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform"]
+
+frame = 31
+
+[node name="Oneway Platform1" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 448, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform1"]
+
+frame = 31
+
+[node name="Oneway Platform2" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 656, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform2"]
+
+frame = 31
+
+[node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 512, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform4"]
+
+frame = 31
+
+[node name="Oneway Platform6" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 544, -80 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform6"]
+
+frame = 21
+
+[node name="Oneway Platform7" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 576, -80 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform7"]
+
+frame = 21
+
+[node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 608, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform5"]
+
+frame = 31
+
+[node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 672, -48 )
+
+[node name="Sprite" parent="Platforms/Oneway Platform3"]
+
+frame = 31
+
+
+[editable path="Platforms/Oneway Platform"]
+[editable path="Platforms/Oneway Platform1"]
+[editable path="Platforms/Oneway Platform2"]
+[editable path="Platforms/Oneway Platform4"]
+[editable path="Platforms/Oneway Platform6"]
+[editable path="Platforms/Oneway Platform7"]
+[editable path="Platforms/Oneway Platform5"]
+[editable path="Platforms/Oneway Platform3"]
