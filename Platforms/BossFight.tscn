@@ -2,7 +2,7 @@
 
 [ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://TileSet/Water.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entity/Boss.tscn" type="PackedScene" id=3]
 
 [node name="BossFight" type="TileMap"]
 
@@ -111,86 +111,21 @@ margin/right = 288.0
 margin/bottom = 256.0
 color = Color( 0.121569, 0.584314, 0.882353, 1 )
 
-[node name="Platforms" type="Node2D" parent="."]
+[node name="Boss" parent="." instance=ExtResource( 3 )]
 
-[node name="Oneway Platform" parent="Platforms" instance=ExtResource( 3 )]
+transform/pos = Vector2( 640, -48 )
 
-editor/display_folded = true
-transform/pos = Vector2( 464, -48 )
+[node name="BossEnabler" type="VisibilityEnabler2D" parent="."]
 
-[node name="Sprite" parent="Platforms/Oneway Platform"]
+transform/pos = Vector2( 640, -32 )
+rect = Rect2( 0, 0, 16, 16 )
+enabler/pause_animations = true
+enabler/freeze_bodies = true
+enabler/pause_particles = true
+enabler/pause_animated_sprites = true
+enabler/process_parent = false
+enabler/fixed_process_parent = false
 
-frame = 31
-
-[node name="Oneway Platform1" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 448, -48 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform1"]
-
-frame = 31
-
-[node name="Oneway Platform2" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 656, -48 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform2"]
-
-frame = 31
-
-[node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 512, -48 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform4"]
-
-frame = 31
-
-[node name="Oneway Platform6" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 544, -80 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform6"]
-
-frame = 21
-
-[node name="Oneway Platform7" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 576, -80 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform7"]
-
-frame = 21
-
-[node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 608, -48 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform5"]
-
-frame = 31
-
-[node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 3 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 672, -48 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform3"]
-
-frame = 31
+[connection signal="enter_screen" from="BossEnabler" to="Boss" method="_on_BossEnabler_enter_screen" flags=6]
 
 
-[editable path="Platforms/Oneway Platform"]
-[editable path="Platforms/Oneway Platform1"]
-[editable path="Platforms/Oneway Platform2"]
-[editable path="Platforms/Oneway Platform4"]
-[editable path="Platforms/Oneway Platform6"]
-[editable path="Platforms/Oneway Platform7"]
-[editable path="Platforms/Oneway Platform5"]
-[editable path="Platforms/Oneway Platform3"]

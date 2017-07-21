@@ -3,19 +3,21 @@ extends RigidBody2D
 const initial_pos = Vector2(50.0, 670.0)
 var base_shape
 
+var Global
+
 var anim = ""
 var siding_left = false
 var jumping = false
 var stopping_jump = false
 var stop_jumping = false
 
-var RUN_ACCEL = 3000.0
-var RUN_DEACCEL = 3000.0
-var RUN_MAX_VELOCITY = 180.0
-var AIR_ACCEL = 2000.0
-var AIR_DEACCEL = 2500.0
+var RUN_ACCEL = 800.0
+var RUN_DEACCEL = 800.0
+var RUN_MAX_VELOCITY = 200.0
+var AIR_ACCEL = 200.0
+var AIR_DEACCEL = 250.0
 var JUMP_VELOCITY = 260
-var STOP_JUMP_FORCE = 950.0
+var STOP_JUMP_FORCE = 900.0
 
 var MAX_FLOOR_AIRBONE_TIME = 0.15
 var airbone_time = 1e20
@@ -30,6 +32,9 @@ func _ready():
 	get_node("UI/Transition/Animation").play("In")
 	sound_node = get_node("Sound")
 	base_shape = get_shape(0)
+	Global = get_node("/root/Global")
+	Global.checkpoint = get_global_pos()
+	set_global_pos(Global.checkpoint)
 
 func update_score(pts, coin):
 	if (coin):
@@ -191,6 +196,8 @@ func _integrate_forces(s):
 	# Aplicamos gravedad lineal
 	lv += s.get_total_gravity()*step
 	s.set_linear_velocity(lv)
+	
+	Global.player_pos = get_global_pos()
 	
 	if (get_pos().y > 800):
 		sound_node.play("fall_death")
