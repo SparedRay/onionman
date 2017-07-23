@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://TileSet/Water.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entity/Jelly.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entity/Mark.tscn" type="PackedScene" id=8]
 
 [node name="TileMap" type="TileMap"]
 
@@ -24,65 +25,109 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -65534, 19, -65531, 23, -65530, 19, -65529, 75, -65528, 74, -65527, 76, -65526, 19, 0, 20, 1, 21, 2, 21, 3, 27, 4, 27, 5, 20, 6, 21, 7, 21, 8, 21, 9, 21, 10, 21, 11, 22, 65536, 24, 65537, 25, 65538, 26, 65541, 24, 65542, 25, 65543, 25, 65544, 25, 65545, 25, 65546, 25, 65547, 26, 131072, 24, 131073, 25, 131074, 26, 131077, 24, 131078, 25, 131079, 25, 131080, 25, 131081, 25, 131082, 25, 131083, 26, 196608, 24, 196609, 25, 196610, 26, 196613, 24, 196614, 25, 196615, 25, 196616, 25, 196617, 25, 196618, 25, 196619, 26, 262144, 24, 262145, 25, 262146, 26, 262149, 24, 262150, 25, 262151, 25, 262152, 25, 262153, 25, 262154, 25, 262155, 26, 327680, 24, 327681, 25, 327682, 26, 327685, 24, 327686, 25, 327687, 25, 327688, 25, 327689, 25, 327690, 25, 327691, 26, 393216, 24, 393217, 25, 393218, 26, 393221, 24, 393222, 25, 393223, 25, 393224, 25, 393225, 25, 393226, 25, 393227, 26, 458752, 24, 458753, 25, 458754, 26, 458757, 24, 458758, 25, 458759, 25, 458760, 25, 458761, 25, 458762, 25, 458763, 26, 524288, 24, 524289, 25, 524290, 26, 524293, 24, 524294, 25, 524295, 25, 524296, 25, 524297, 25, 524298, 25, 524299, 26, 589824, 24, 589825, 25, 589826, 26, 589829, 24, 589830, 25, 589831, 25, 589832, 25, 589833, 25, 589834, 25, 589835, 26, 655360, 24, 655361, 25, 655362, 26, 655365, 24, 655366, 25, 655367, 25, 655368, 25, 655369, 25, 655370, 25, 655371, 26, 720896, 34, 720897, 35, 720898, 35, 720899, 35, 720900, 35, 720901, 35, 720902, 35, 720903, 35, 720904, 35, 720905, 35, 720906, 35, 720907, 36 )
+tile_data = IntArray( -65534, 26, -65531, 30, -65530, 26, -65526, 26, 0, 27, 1, 28, 2, 29, 3, 21, 4, 21, 5, 27, 6, 28, 7, 28, 8, 28, 9, 28, 10, 28, 11, 29, 65536, 31, 65537, 32, 65538, 33, 65541, 31, 65542, 32, 65543, 32, 65544, 32, 65545, 32, 65546, 32, 65547, 33, 131072, 31, 131073, 32, 131074, 33, 131077, 31, 131078, 32, 131079, 32, 131080, 32, 131081, 32, 131082, 32, 131083, 33, 196608, 31, 196609, 32, 196610, 33, 196613, 31, 196614, 32, 196615, 32, 196616, 32, 196617, 32, 196618, 32, 196619, 33, 262144, 31, 262145, 32, 262146, 33, 262149, 31, 262150, 32, 262151, 32, 262152, 32, 262153, 32, 262154, 32, 262155, 33, 327680, 31, 327681, 32, 327682, 33, 327685, 31, 327686, 32, 327687, 32, 327688, 32, 327689, 32, 327690, 32, 327691, 33, 393216, 31, 393217, 32, 393218, 33, 393221, 31, 393222, 32, 393223, 32, 393224, 32, 393225, 32, 393226, 32, 393227, 33, 458752, 31, 458753, 32, 458754, 33, 458757, 31, 458758, 32, 458759, 32, 458760, 32, 458761, 32, 458762, 32, 458763, 33, 524288, 31, 524289, 32, 524290, 33, 524293, 31, 524294, 32, 524295, 32, 524296, 32, 524297, 32, 524298, 32, 524299, 33, 589824, 31, 589825, 32, 589826, 33, 589829, 31, 589830, 32, 589831, 32, 589832, 32, 589833, 32, 589834, 32, 589835, 33, 655360, 31, 655361, 32, 655362, 33, 655365, 31, 655366, 32, 655367, 32, 655368, 32, 655369, 32, 655370, 32, 655371, 33, 720896, 31, 720897, 32, 720898, 32, 720899, 32, 720900, 32, 720901, 32, 720902, 32, 720903, 32, 720904, 32, 720905, 32, 720906, 32, 720907, 33 )
 script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 24, -22 )
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Oneway Platform" parent="." instance=ExtResource( 4 )]
+[node name="Land" type="Node2D" parent="."]
 
-editor/display_folded = true
-transform/pos = Vector2( 112, -32 )
 z/z = -1
 
-[node name="Sprite" parent="Oneway Platform"]
-
-frame = 100
-
-[node name="Oneway Platform1" parent="." instance=ExtResource( 4 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 128, -32 )
-z/z = -1
-
-[node name="Sprite" parent="Oneway Platform1"]
-
-frame = 101
-
-[node name="Oneway Platform2" parent="." instance=ExtResource( 4 )]
+[node name="Oneway Platform2" parent="Land" instance=ExtResource( 4 )]
 
 editor/display_folded = true
 transform/pos = Vector2( 144, -32 )
 z/z = -1
 
-[node name="Sprite" parent="Oneway Platform2"]
+[node name="Sprite" parent="Land/Oneway Platform2"]
 
 frame = 102
+
+[node name="Oneway Platform1" parent="Land" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 128, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Oneway Platform1"]
+
+frame = 101
+
+[node name="Oneway Platform" parent="Land" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 112, -32 )
+z/z = -1
+
+[node name="Sprite" parent="Land/Oneway Platform"]
+
+frame = 100
+
+[node name="TileMap" type="TileMap" parent="Land"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -65529, 59, -65528, 60, -65527, 61 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
 editor/display_folded = true
 transform/pos = Vector2( 59, -57 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( -16, 0 )
 
+[node name="Sprite" parent="Platforms/Oneway Platform3"]
+
+frame = 43
+
 [node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 4 )]
+
+[node name="Sprite" parent="Platforms/Oneway Platform4"]
+
+frame = 41
 
 [node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 16, 0 )
 
+[node name="Sprite" parent="Platforms/Oneway Platform5"]
+
+frame = 43
+
 [node name="Water" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Water" parent="Water" instance=ExtResource( 5 )]
 
@@ -107,6 +152,9 @@ color = Color( 0.121569, 0.584314, 0.882353, 1 )
 [node name="Coins" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coin" parent="Coins" instance=ExtResource( 6 )]
 
@@ -158,11 +206,31 @@ transform/pos = Vector2( 145, -49 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 7 )]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
-transform/pos = Vector2( 125, -38 )
+[node name="Jelly" parent="Enemies" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 156, 0 )
+
+[node name="Marks" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Mark" parent="Marks" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 80, 32 )
+
+[node name="Mark1" parent="Marks" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 176, 32 )
 
 
-[editable path="Oneway Platform"]
-[editable path="Oneway Platform1"]
-[editable path="Oneway Platform2"]
+[editable path="Land/Oneway Platform2"]
+[editable path="Land/Oneway Platform1"]
+[editable path="Land/Oneway Platform"]
+[editable path="Platforms/Oneway Platform3"]
+[editable path="Platforms/Oneway Platform4"]
+[editable path="Platforms/Oneway Platform5"]

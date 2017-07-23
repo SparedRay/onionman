@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
 [ext_resource path="res://TileSet/Tree.png" type="Texture" id=3]
 [ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Jelly.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Mark.tscn" type="PackedScene" id=6]
 
 [node name="TileMap" type="TileMap"]
 
@@ -22,18 +23,27 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -131067, 12, -131066, 30, -131065, 30, -131064, 12, -65532, 19, 1, 20, 2, 21, 3, 21, 4, 22, 65537, 24, 65538, 25, 65539, 25, 65540, 26, 131073, 24, 131074, 25, 131075, 25, 131076, 26, 196609, 24, 196610, 25, 196611, 25, 196612, 26, 262145, 24, 262146, 25, 262147, 25, 262148, 26, 327681, 24, 327682, 25, 327683, 25, 327684, 26, 393217, 24, 393218, 25, 393219, 25, 393220, 26, 458753, 24, 458754, 25, 458755, 25, 458756, 26, 524289, 24, 524290, 25, 524291, 25, 524292, 26, 589825, 24, 589826, 25, 589827, 25, 589828, 26, 655361, 24, 655362, 25, 655363, 25, 655364, 26, 720897, 24, 720898, 25, 720899, 25, 720900, 26, 786433, 34, 786434, 35, 786435, 35, 786436, 36 )
+tile_data = IntArray( -131067, 13, -131066, 17, -131065, 17, -131064, 13, -65532, 26, 0, 1, 1, 27, 2, 28, 3, 28, 4, 29, 9, 1, 65537, 31, 65538, 32, 65539, 32, 65540, 33, 131073, 31, 131074, 32, 131075, 32, 131076, 33, 196609, 31, 196610, 32, 196611, 32, 196612, 33, 262145, 31, 262146, 32, 262147, 32, 262148, 33, 327681, 31, 327682, 32, 327683, 32, 327684, 33, 393217, 31, 393218, 32, 393219, 32, 393220, 33, 458753, 31, 458754, 32, 458755, 32, 458756, 33, 524289, 31, 524290, 32, 524291, 32, 524292, 33, 589825, 31, 589826, 32, 589827, 32, 589828, 33, 655361, 31, 655362, 32, 655363, 32, 655364, 33, 720897, 31, 720898, 32, 720899, 32, 720900, 33, 786433, 31, 786434, 32, 786435, 32, 786436, 33 )
 script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 52, -22 )
 z/z = -1
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coins" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coin" parent="Coins" instance=ExtResource( 4 )]
 
@@ -62,13 +72,38 @@ transform/pos = Vector2( 128, -48 )
 [node name="Enemies" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Jelly" parent="Enemies" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 48, -48 )
+transform/pos = Vector2( 48, 0 )
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Jelly1" parent="Enemies" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 112, -80 )
+transform/pos = Vector2( 128, -32 )
+
+[node name="Marks" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Mark" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 0, 32 )
+
+[node name="Mark1" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 64, 32 )
+
+[node name="Mark2" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 64, 0 )
+
+[node name="Mark3" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 128, 0 )
 
 

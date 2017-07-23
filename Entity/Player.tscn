@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://Entity/Player.gd" type="Script" id=1]
 [ext_resource path="res://UI/ThatBoy.ttf" type="DynamicFontData" id=2]
@@ -6,33 +6,21 @@
 [ext_resource path="res://UI/Music/death.wav" type="Sample" id=4]
 [ext_resource path="res://UI/Music/fall_death.wav" type="Sample" id=5]
 [ext_resource path="res://UI/Music/sfx_jump.wav" type="Sample" id=6]
-[ext_resource path="res://UI/Touch/left.png" type="Texture" id=7]
-[ext_resource path="res://UI/Touch/right.png" type="Texture" id=8]
-[ext_resource path="res://UI/Touch/pause.png" type="Texture" id=9]
-[ext_resource path="res://UI/Pause.gd" type="Script" id=10]
-[ext_resource path="res://UI/m5x7.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://UI/Touch/jump.png" type="Texture" id=12]
-[ext_resource path="res://UI/hud.png" type="Texture" id=13]
-[ext_resource path="res://UI/CRTFrame.png" type="Texture" id=14]
+[ext_resource path="res://UI/Music/step.wav" type="Sample" id=7]
 
-[sub_resource type="RayShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-length = 16.5586
+extents = Vector2( 3, 6 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 1, 3, 6, 12, -4, 12 )
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
 font/font = ExtResource( 2 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
 resource/name = "Dying"
 length = 5.0
@@ -66,7 +54,7 @@ tracks/2/keys = {
 "times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -8, 8 ), Vector2( -4, 18 ), Vector2( 7, 16 ), Vector2( 9, 6 ), Vector2( 0, 0 ), Vector2( -8, 8 ), Vector2( -4, 18 ), Vector2( 7, 16 ), Vector2( 9, 6 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, -16 ), Vector2( -8, -8 ), Vector2( -4, 0 ), Vector2( 7, 0 ), Vector2( 9, -10 ), Vector2( 0, -16 ), Vector2( -8, -8 ), Vector2( -4, 2 ), Vector2( 7, 0 ), Vector2( 9, -10 ), Vector2( 0, -16 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("PlayerLabel:visibility/visible")
@@ -88,31 +76,11 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 100 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("UI/pause/Fill:visibility/opacity")
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/imported = false
 tracks/5/keys = {
-"times": FloatArray( 0, 1, 2 ),
-"transitions": FloatArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 0.3 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("UI/pause/RetryButton:visibility/visible")
-tracks/6/interp = 1
-tracks/6/imported = false
-tracks/6/keys = {
-"times": FloatArray( 0, 2 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ false, true ]
-}
-tracks/7/type = "method"
-tracks/7/path = NodePath(".")
-tracks/7/interp = 1
-tracks/7/imported = false
-tracks/7/keys = {
 "times": FloatArray( 2 ),
 "transitions": FloatArray( 1 ),
 "values": [ {
@@ -121,9 +89,10 @@ tracks/7/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 
-length = 1.0
+resource/name = "Fall"
+length = 0.1
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -133,13 +102,40 @@ tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ 13 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:create_hit")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 8 ]
 }
 
 [sub_resource type="Animation" id=6]
 
-length = 1.0
+resource/name = "Jump"
+length = 0.1
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -149,40 +145,51 @@ tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
-"update": 0,
-"values": [ 8 ]
+"update": 1,
+"values": [ 12 ]
 }
 
 [sub_resource type="Animation" id=7]
 
-length = 1.0
-loop = false
+length = 0.4
+loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 0,
-"values": [ 12 ]
+"times": FloatArray( 0, 0.2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ 9, 10 ]
 }
 
 [sub_resource type="Animation" id=8]
 
+resource/name = "Invulnerable"
 length = 0.5
-loop = true
-step = 0.25
+loop = false
+step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:visibility/visible")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.25 ),
-"transitions": FloatArray( 1, 1 ),
+"times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 9, 10 ]
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:vulnerable")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0.5 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="SampleLibrary" id=9]
@@ -205,211 +212,29 @@ samples/sfx_jump = {
 "priority": 0,
 "sample": ExtResource( 6 )
 }
-
-[sub_resource type="RectangleShape2D" id=10]
-
-custom_solver_bias = 0.0
-extents = Vector2( 7, 2 )
-
-[sub_resource type="DynamicFont" id=11]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=12]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="Animation" id=13]
-
-length = 1.0
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visibility/visible")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.5 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ true, false ]
+samples/step = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 7 )
 }
 
-[sub_resource type="DynamicFont" id=14]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=15]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=16]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=17]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=18]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="GDScript" id=19]
-
-script/source = "extends Timer
-
-var time_left = 0
-var time_node
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	time_left = get_wait_time()
-	time_node = get_node(\"Time\")
-	time_node.set_text(\"%03d\" % (floor(time_left)))
-
-func _process(delta):
-	time_left = get_time_left()
-	time_node.set_text(\"%03d\" % (floor(time_left)))
-	if (time_left < 0.1):
-		_on_Timer_timeout()
-
-
-func _on_Timer_timeout():
-	get_parent().get_parent()._dying()
-"
-
-[sub_resource type="DynamicFont" id=20]
-
-font/size = 16
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 11 )
-
-[sub_resource type="Animation" id=21]
-
-resource/name = "Text"
-length = 1.0
-loop = false
-step = 0.1
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_update"
-} ]
-}
-
-[sub_resource type="Animation" id=22]
-
-length = 1.0
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:transform/pos")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.9 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -300, 0 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("../Timer")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0.9 ),
-"transitions": FloatArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "start"
-} ]
-}
-
-[sub_resource type="Animation" id=23]
-
-length = 1.0
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:transform/pos")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.9 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 300, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("../pause")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0.9 ),
-"transitions": FloatArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_retry"
-} ]
-}
-
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 0.156829, 0, 0, 0.536035, 1, 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 1, -6 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 2 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/1/trigger = false
 collision/layers = 1
 collision/mask = 1
-mode = 2
-mass = 3.0
-friction = 0.0
-bounce = 0.0
-gravity_scale = 1.0
-custom_integrator = true
-continuous_cd = 0
-contacts_reported = 3
-contact_monitor = false
-sleeping = false
-can_sleep = true
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
+collision/margin = 0.08
 script/script = ExtResource( 1 )
+attacking = false
+create_hit = false
+need_synchro = true
+vulnerable = true
 
 [node name="PlayerLabel" type="Label" parent="."]
 
@@ -418,10 +243,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = -8.0
-margin/top = -11.0
+margin/top = -26.0
 margin/right = 12.0
-margin/bottom = 2.0
-custom_fonts/font = SubResource( 3 )
+margin/bottom = -13.0
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "1P"
@@ -430,681 +255,109 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 
+transform/pos = Vector2( 0, -16 )
 texture = ExtResource( 3 )
 vframes = 14
 hframes = 8
-frame = 8
+frame = 13
 region_rect = Rect2( 145.5, 143, 16, 10 )
-
-[node name="Anim" type="AnimationPlayer" parent="."]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/Dying = SubResource( 4 )
-anims/Falling = SubResource( 5 )
-anims/Idle = SubResource( 6 )
-anims/Jumping = SubResource( 7 )
-anims/Run = SubResource( 8 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = ""
-
-[node name="Sound" type="SamplePlayer2D" parent="."]
-
-params/volume_db = 0.0
-params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
-params/attenuation/max_distance = 2048.0
-params/attenuation/distance_exp = 1.0
-config/polyphony = 1
-config/samples = SubResource( 9 )
-config/pitch_random = 0.0
-
-[node name="Camera" type="Camera2D" parent="."]
-
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 0.25, 0.25 )
-limit/left = 0
-limit/top = 0
-limit/right = 10000000
-limit/bottom = 10000000
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.0
-drag_margin/top = 0.0
-drag_margin/right = 0.0
-drag_margin/bottom = 0.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 1, 7 )
-transform/scale = Vector2( 0.156829, 0.536035 )
+visibility/visible = false
+transform/pos = Vector2( 1, -6 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="."]
 
-build_mode = 0
-polygon = Vector2Array( -4, 12, 6, 12, 1, 3 )
-shape_range = Vector2( 1, 1 )
-trigger = false
+playback/process_mode = 0
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Dying = SubResource( 3 )
+anims/Fall = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Jump = SubResource( 6 )
+anims/Run = SubResource( 7 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "Idle"
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-editor/display_folded = true
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 5, 5 )
-
-[node name="Left" type="TouchScreenButton" parent="UI"]
-
-transform/pos = Vector2( 10, 80 )
-transform/scale = Vector2( 0.225, 0.225 )
-normal = ExtResource( 7 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "move_left"
-visibility_mode = 1
-
-[node name="right" type="TouchScreenButton" parent="UI"]
-
-transform/pos = Vector2( 40, 80 )
-transform/scale = Vector2( 0.225, 0.225 )
-normal = ExtResource( 8 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "move_right"
-visibility_mode = 1
-
-[node name="pause" type="TouchScreenButton" parent="UI"]
-
-process/pause_mode = 2
-editor/display_folded = true
-transform/pos = Vector2( 170, 10 )
-transform/scale = Vector2( 0.258333, 0.25 )
-normal = ExtResource( 9 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = ""
-visibility_mode = 1
-script/script = ExtResource( 10 )
-
-[node name="Fill" type="ColorFrame" parent="UI/pause"]
-
-visibility/opacity = 0.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -658.0
-margin/top = -40.0
-margin/right = 86.0
-margin/bottom = 395.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="RetryButton" type="TouchScreenButton" parent="UI/pause"]
-
-editor/display_folded = true
-visibility/visible = false
-transform/pos = Vector2( -309.678, 160 )
-transform/scale = Vector2( 3.87097, 4 )
-z/z = 1
-normal = null
-pressed = null
-bitmask = null
-shape = SubResource( 10 )
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "reset"
-visibility_mode = 0
-
-[node name="Retry" type="Label" parent="UI/pause/RetryButton"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = -13.0
-margin/top = -6.0
-margin/right = 17.0
-margin/bottom = 7.0
-custom_fonts/font = SubResource( 11 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "RETRY"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="ContinueButton" type="Label" parent="UI/pause"]
-
-editor/display_folded = true
-visibility/visible = false
-rect/scale = Vector2( 3, 3 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = -350.0
-margin/top = 150.0
-margin/right = -312.0
-margin/bottom = 165.0
-custom_fonts/font = SubResource( 12 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "PAUSED"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Anim" type="AnimationPlayer" parent="UI/pause/ContinueButton"]
+[node name="Effects" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Blink = SubResource( 13 )
+anims/Invulnerable = SubResource( 8 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="jump" type="TouchScreenButton" parent="UI"]
-
-transform/pos = Vector2( 160, 70 )
-transform/scale = Vector2( 0.25, 0.25 )
-normal = ExtResource( 12 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "jump"
-visibility_mode = 1
-
-[node name="Coins" type="Control" parent="UI"]
+[node name="Hitbox" type="Area2D" parent="."]
 
 editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 3.0
-margin/top = -2.0
-margin/right = 23.0
-margin/bottom = 11.0
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 1, -6 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
 __meta__ = {
-"_edit_group_": true
+"_edit_lock_": true
 }
 
-[node name="Coin" type="Label" parent="UI/Coins"]
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="Hitbox"]
 
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 3.0
-margin/top = 3.0
-margin/right = 43.0
-margin/bottom = 16.0
-custom_fonts/font = SubResource( 14 )
-text = "COIN"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+transform/pos = Vector2( 1, -6 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
-[node name="Sprite" type="Sprite" parent="UI/Coins"]
+[node name="AttackSpot" type="Position2D" parent="."]
 
-transform/pos = Vector2( 4, 7.5 )
-transform/scale = Vector2( 0.2875, 0.2625 )
-texture = ExtResource( 3 )
-vframes = 14
-hframes = 8
-frame = 104
+transform/pos = Vector2( 0, 10 )
+z/z = 5
 
-[node name="X" type="Label" parent="UI/Coins"]
+[node name="Sound" type="SamplePlayer" parent="."]
 
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 6.0
-margin/top = 7.0
-margin/right = 16.0
-margin/bottom = 20.0
-custom_fonts/font = SubResource( 15 )
-text = "X"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+config/polyphony = 1
+config/samples = SubResource( 9 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 20.0
+default/filter/resonance = 0.0
+default/filter/gain = 0.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
-[node name="Pts" type="Label" parent="UI/Coins"]
+[node name="Jump" type="Timer" parent="."]
 
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 10.0
-margin/top = 7.0
-margin/right = 50.0
-margin/bottom = 20.0
-custom_fonts/font = SubResource( 16 )
-text = "0000"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Score" type="Control" parent="UI"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 147.0
-margin/top = 0.0
-margin/right = 197.0
-margin/bottom = 12.0
-
-[node name="Label" type="Label" parent="UI/Score"]
-
-rect/scale = Vector2( 0.5, 0.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 14.0
-custom_fonts/font = SubResource( 17 )
-text = "SCORE"
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Pts" type="Label" parent="UI/Score"]
-
-rect/scale = Vector2( 0.5, 0.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = -2.0
-margin/top = 5.0
-margin/right = 46.0
-margin/bottom = 19.0
-custom_fonts/font = SubResource( 18 )
-text = "00000000"
-align = 1
-valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Frame" type="Node2D" parent="UI"]
-
-editor/display_folded = true
-z/z = -2
-
-[node name="ColorFrame" type="ColorFrame" parent="UI/Frame"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 192.0
-margin/bottom = 13.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="Timer" type="Timer" parent="UI"]
-
-editor/display_folded = true
-process_mode = 1
-wait_time = 500.0
-one_shot = false
+process_mode = 0
+wait_time = 1.0
+one_shot = true
 autostart = false
-script/script = SubResource( 19 )
 
-[node name="Clock" type="Sprite" parent="UI/Timer"]
+[connection signal="body_enter" from="Hitbox" to="." method="_on_Hitbox_body_enter"]
 
-transform/pos = Vector2( 76, 18 )
-texture = ExtResource( 13 )
-vframes = 2
-hframes = 10
-frame = 15
-
-[node name="Next" type="Sprite" parent="UI/Timer"]
-
-transform/pos = Vector2( 84, 18 )
-texture = ExtResource( 13 )
-vframes = 2
-hframes = 10
-frame = 14
-
-[node name="Time" type="Label" parent="UI/Timer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 89.0
-margin/top = 10.0
-margin/right = 119.0
-margin/bottom = 23.0
-custom_fonts/font = SubResource( 20 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "000"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Animation" type="AnimationPlayer" parent="UI/Timer"]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/Text = SubResource( 21 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = ""
-
-[node name="CRTFrame" type="Sprite" parent="UI"]
-
-transform/pos = Vector2( 96, 54 )
-transform/scale = Vector2( 0.177449, 0.133005 )
-texture = ExtResource( 14 )
-
-[node name="Transition" type="Node2D" parent="UI"]
-
-editor/display_folded = true
-z/z = 3
-
-[node name="ColorFrame" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 104.0
-margin/right = 192.0
-margin/bottom = 110.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame1" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -6.0
-margin/top = 98.0
-margin/right = 200.0
-margin/bottom = 104.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame2" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -12.0
-margin/top = 92.0
-margin/right = 206.0
-margin/bottom = 98.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame3" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -18.0
-margin/top = 86.0
-margin/right = 212.0
-margin/bottom = 92.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame4" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -24.0
-margin/top = 80.0
-margin/right = 218.0
-margin/bottom = 86.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame5" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -30.0
-margin/top = 74.0
-margin/right = 224.0
-margin/bottom = 80.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame6" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -36.0
-margin/top = 68.0
-margin/right = 230.0
-margin/bottom = 74.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame7" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -42.0
-margin/top = 62.0
-margin/right = 236.0
-margin/bottom = 68.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame8" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -48.0
-margin/top = 56.0
-margin/right = 242.0
-margin/bottom = 62.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame9" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -54.0
-margin/top = 50.0
-margin/right = 248.0
-margin/bottom = 56.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame10" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -60.0
-margin/top = 44.0
-margin/right = 254.0
-margin/bottom = 50.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame11" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -66.0
-margin/top = 38.0
-margin/right = 260.0
-margin/bottom = 44.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame12" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -72.0
-margin/top = 32.0
-margin/right = 266.0
-margin/bottom = 38.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame13" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -78.0
-margin/top = 26.0
-margin/right = 272.0
-margin/bottom = 32.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame14" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -84.0
-margin/top = 20.0
-margin/right = 278.0
-margin/bottom = 26.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame15" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -90.0
-margin/top = 14.0
-margin/right = 284.0
-margin/bottom = 20.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame16" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -96.0
-margin/top = 8.0
-margin/right = 290.0
-margin/bottom = 14.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame17" type="ColorFrame" parent="UI/Transition"]
-
-rect/min_size = Vector2( 192, 6 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -102.0
-margin/top = 2.0
-margin/right = 296.0
-margin/bottom = 8.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="Animation" type="AnimationPlayer" parent="UI/Transition"]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/In = SubResource( 22 )
-anims/Out = SubResource( 23 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = ""
-
-[connection signal="pressed" from="UI/pause" to="UI/pause" method="_on_pause_pressed"]
-
-[connection signal="pressed" from="UI/pause/RetryButton" to="UI/pause" method="_on_RetryButton_pressed"]
-
-[connection signal="timeout" from="UI/Timer" to="UI/Timer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Jump" to="." method="_on_Jump_timeout"]
 
 

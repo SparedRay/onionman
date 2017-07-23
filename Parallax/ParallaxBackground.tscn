@@ -23,76 +23,74 @@ scroll/ignore_camera_zoom = true
 editor/display_folded = true
 motion/scale = Vector2( 0.1, 1 )
 motion/offset = Vector2( 0, 0 )
-motion/mirroring = Vector2( 608, 0 )
+motion/mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="Sky"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="Sprite1" type="Sprite" parent="Sky"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( 320, 0 )
+offset = Vector2( 160, 0 )
 
 [node name="Cloud" type="ParallaxLayer" parent="."]
 
+editor/display_folded = true
 motion/scale = Vector2( 0.15, 1 )
 motion/offset = Vector2( 0, 0 )
-motion/mirroring = Vector2( 608, 0 )
+motion/mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="Cloud"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 2 )
 centered = false
+offset = Vector2( 0, 32 )
 
 [node name="Sprite1" type="Sprite" parent="Cloud"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 2 )
 centered = false
-offset = Vector2( 320, 0 )
+offset = Vector2( 160, 32 )
 
 [node name="Far Mountain" type="ParallaxLayer" parent="."]
 
+editor/display_folded = true
 motion/scale = Vector2( 0.2, 1 )
 motion/offset = Vector2( 0, 0 )
-motion/mirroring = Vector2( 608, 0 )
+motion/mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="Far Mountain"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 3 )
 centered = false
+offset = Vector2( 0, 32 )
 
 [node name="Sprite1" type="Sprite" parent="Far Mountain"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 3 )
 centered = false
-offset = Vector2( 320, 0 )
+offset = Vector2( 160, 32 )
 
 [node name="Near Mountain" type="ParallaxLayer" parent="."]
 
+editor/display_folded = true
 motion/scale = Vector2( 0.4, 1 )
 motion/offset = Vector2( 0, 0 )
-motion/mirroring = Vector2( 608, 0 )
+motion/mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="Near Mountain"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 4 )
 centered = false
+offset = Vector2( 0, 32 )
 
 [node name="Sprite1" type="Sprite" parent="Near Mountain"]
 
-transform/scale = Vector2( 3.8, 3.8 )
 texture = ExtResource( 4 )
 centered = false
-offset = Vector2( 320, 0 )
+offset = Vector2( 160, 32 )
 
 

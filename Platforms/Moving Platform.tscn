@@ -54,13 +54,6 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 65534, 16, 65535, 17, 0, 17, 1, 18 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform"]
-
-build_mode = 0
-polygon = Vector2Array( -32, 0, 32, 0, 32, 16, -32, 16 )
-shape_range = Vector2( 0, 0 )
-trigger = false
+tile_data = IntArray( 65534, 15, 65535, 17, 0, 17, 1, 15 )
 
 

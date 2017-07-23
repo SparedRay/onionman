@@ -21,17 +21,24 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 1, 33, 2, 82, 65537, 37, 131073, 37, 196609, 37, 262145, 37, 327681, 37, 393217, 37, 458753, 37, 524289, 37, 589825, 37, 655361, 37, 720897, 37, 786433, 37, 851969, 37, 917505, 37 )
+tile_data = IntArray( 0, 1, 1, 34, 2, 1, 65537, 38, 131073, 38, 196609, 38, 262145, 38, 327681, 38, 393217, 38, 458753, 38, 524289, 38, 589825, 38, 655361, 38, 720897, 38, 786433, 38, 851969, 38, 917505, 38 )
 script/script = ExtResource( 2 )
 
 [node name="Coins" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coin" parent="Coins" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 25, -17 )
 
 [node name="Enemies" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
 
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
 [ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Jelly.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Mark.tscn" type="PackedScene" id=6]
 
 [node name="TileMap" type="TileMap"]
 
@@ -22,12 +23,15 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -131056, 19, 16, 75, 17, 76, 65538, 19, 65539, 19, 131074, 16, 131075, 17, 131076, 17, 131077, 18, 131082, 77, 131084, 19, 131087, 75, 131088, 74, 131089, 74, 131090, 76, 131091, 19, 196617, 20, 196618, 21, 196619, 21, 196620, 21, 196621, 22, 196622, 27, 196623, 20, 196624, 21, 196625, 21, 196626, 21, 196627, 21, 196628, 21, 196629, 22, 262153, 24, 262154, 25, 262155, 25, 262156, 25, 262157, 26, 262159, 24, 262160, 25, 262161, 25, 262162, 25, 262163, 25, 262164, 25, 262165, 26, 327689, 24, 327690, 25, 327691, 25, 327692, 25, 327693, 26, 327695, 24, 327696, 25, 327697, 25, 327698, 25, 327699, 25, 327700, 25, 327701, 26, 393225, 24, 393226, 25, 393227, 25, 393228, 25, 393229, 26, 393231, 24, 393232, 25, 393233, 25, 393234, 25, 393235, 25, 393236, 25, 393237, 26, 458761, 24, 458762, 25, 458763, 25, 458764, 25, 458765, 26, 458767, 24, 458768, 25, 458769, 25, 458770, 25, 458771, 25, 458772, 25, 458773, 26, 524297, 24, 524298, 25, 524299, 25, 524300, 25, 524301, 26, 524303, 24, 524304, 25, 524305, 25, 524306, 25, 524307, 25, 524308, 25, 524309, 26, 589833, 24, 589834, 25, 589835, 25, 589836, 25, 589837, 26, 589839, 24, 589840, 25, 589841, 25, 589842, 25, 589843, 25, 589844, 25, 589845, 26, 655369, 24, 655370, 25, 655371, 25, 655372, 25, 655373, 26, 655375, 24, 655376, 25, 655377, 25, 655378, 25, 655379, 25, 655380, 25, 655381, 26, 720905, 24, 720906, 25, 720907, 25, 720908, 25, 720909, 26, 720911, 24, 720912, 25, 720913, 25, 720914, 25, 720915, 25, 720916, 25, 720917, 26, 786441, 24, 786442, 25, 786443, 25, 786444, 25, 786445, 26, 786447, 24, 786448, 25, 786449, 25, 786450, 25, 786451, 25, 786452, 25, 786453, 26, 851977, 24, 851978, 25, 851979, 25, 851980, 25, 851981, 26, 851983, 24, 851984, 25, 851985, 25, 851986, 25, 851987, 25, 851988, 25, 851989, 26, 917513, 34, 917514, 35, 917515, 35, 917516, 35, 917517, 35, 917518, 35, 917519, 35, 917520, 35, 917521, 35, 917522, 35, 917523, 35, 917524, 35, 917525, 36 )
+tile_data = IntArray( -131056, 26, 65538, 26, 65539, 26, 131074, 23, 131075, 24, 131076, 24, 131077, 25, 131091, 26, 196617, 27, 196618, 28, 196619, 28, 196620, 28, 196621, 29, 196622, 21, 196623, 27, 196624, 28, 196625, 28, 196626, 28, 196627, 28, 196628, 28, 196629, 29, 262153, 31, 262154, 32, 262155, 32, 262156, 32, 262157, 33, 262159, 31, 262160, 32, 262161, 32, 262162, 32, 262163, 32, 262164, 32, 262165, 33, 327689, 31, 327690, 32, 327691, 32, 327692, 32, 327693, 33, 327695, 31, 327696, 32, 327697, 32, 327698, 32, 327699, 32, 327700, 32, 327701, 33, 393225, 31, 393226, 32, 393227, 32, 393228, 32, 393229, 33, 393231, 31, 393232, 32, 393233, 32, 393234, 32, 393235, 32, 393236, 32, 393237, 33, 458761, 31, 458762, 32, 458763, 32, 458764, 32, 458765, 33, 458767, 31, 458768, 32, 458769, 32, 458770, 32, 458771, 32, 458772, 32, 458773, 33, 524297, 31, 524298, 32, 524299, 32, 524300, 32, 524301, 33, 524303, 31, 524304, 32, 524305, 32, 524306, 32, 524307, 32, 524308, 32, 524309, 33, 589833, 31, 589834, 32, 589835, 32, 589836, 32, 589837, 33, 589839, 31, 589840, 32, 589841, 32, 589842, 32, 589843, 32, 589844, 32, 589845, 33, 655369, 31, 655370, 32, 655371, 32, 655372, 32, 655373, 33, 655375, 31, 655376, 32, 655377, 32, 655378, 32, 655379, 32, 655380, 32, 655381, 33, 720905, 31, 720906, 32, 720907, 32, 720908, 32, 720909, 33, 720911, 31, 720912, 32, 720913, 32, 720914, 32, 720915, 32, 720916, 32, 720917, 33, 786441, 31, 786442, 32, 786443, 32, 786444, 32, 786445, 33, 786447, 31, 786448, 32, 786449, 32, 786450, 32, 786451, 32, 786452, 32, 786453, 33, 851977, 31, 851978, 32, 851979, 32, 851980, 32, 851981, 33, 851983, 31, 851984, 32, 851985, 32, 851986, 32, 851987, 32, 851988, 32, 851989, 33, 917513, 31, 917514, 32, 917515, 32, 917516, 32, 917517, 33, 917519, 31, 917520, 32, 917521, 32, 917522, 32, 917523, 32, 917524, 32, 917525, 33 )
 script/script = ExtResource( 2 )
 
 [node name="Top" type="Node2D" parent="."]
 
-editor/display_folded = true
+z/z = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Oneway Platform" parent="Top" instance=ExtResource( 3 )]
 
@@ -92,9 +96,30 @@ transform/pos = Vector2( 272, -16 )
 
 frame = 102
 
+[node name="TileMap" type="TileMap" parent="Top"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 16, 59, 17, 61, 131082, 62, 131087, 59, 131088, 60, 131089, 60, 131090, 61 )
+
 [node name="Coins" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coin" parent="Coins" instance=ExtResource( 4 )]
 
@@ -150,17 +175,53 @@ transform/pos = Vector2( 336, 32 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
-transform/pos = Vector2( 64, -16 )
+[node name="Jelly" parent="Enemies" instance=ExtResource( 5 )]
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource( 5 )]
+transform/pos = Vector2( 80, 32 )
 
-transform/pos = Vector2( 208, 0 )
+[node name="Jelly1" parent="Enemies" instance=ExtResource( 5 )]
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
+transform/pos = Vector2( 240, 48 )
 
-transform/pos = Vector2( 272, -32 )
+[node name="Jelly2" parent="Enemies" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 272, 16 )
+
+[node name="Marks" type="Node2D" parent="."]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Mark" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 16, 64 )
+
+[node name="Mark1" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 80, 64 )
+
+[node name="Mark2" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 128, 80 )
+
+[node name="Mark3" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 336, 80 )
+
+[node name="Mark4" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 288, 48 )
+
+[node name="Mark5" parent="Marks" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 224, 48 )
 
 
 [editable path="Top/Oneway Platform"]

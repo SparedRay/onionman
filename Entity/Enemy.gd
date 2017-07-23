@@ -1,76 +1,47 @@
-extends RigidBody2D
+extends Node2D
 
-const STATE_WALKING = 0
-const STATE_DYING = 1
-
-var state = STATE_WALKING
-var direction = -1
-var anim = ""
-
-var rc_left = null
-var rc_right = null
-var WALK_SPEED = 50
-
-var player_class = preload("res://Entity/Player.gd")
-
-func _die():
-	queue_free()
-
-func _pre_die():
-	clear_shapes()
-	set_mode(MODE_STATIC)
-
-func _invert_direction():
-	direction = -direction
-	get_node("Sprite").set_scale(Vector2(-direction, 1))
-
-func _integrate_forces(s):
-	var lv = s.get_linear_velocity()
-	var new_anim = anim
-	
-	if (state == STATE_DYING):
-		new_anim = "Die"
-	elif (state == STATE_WALKING):
-		new_anim = "Run"
-		
-		var wall_side = 0.0
-		for x in range(s.get_contact_count()):
-			var cc = s.get_contact_collider_object(x)
-			var dp = s.get_contact_local_normal(x)
-			
-			if (cc):
-				if (cc extends player_class and dp.y > 0.8):
-					set_mode(MODE_RIGID)
-					state = STATE_DYING
-					set_friction(1)
-					cc.update_score(200, false)
-					get_node("Sound").play("woosh-3")
-					break
-				elif (cc extends player_class):
-					cc.sound_node.play("death")
-					cc._dying()
-			
-			if (dp.x > 0.9):
-				wall_side = 1.0
-			elif (dp.x < -0.9):
-				wall_side = -1.0
-		
-		if (wall_side != 0 and wall_side != direction):
-			_invert_direction()
-		
-		if (direction < 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
-			_invert_direction()
-		elif (direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
-			_invert_direction()
-		
-		lv.x = direction*WALK_SPEED
-	
-	if (anim != new_anim):
-		anim = new_anim
-		get_node("Animation").play(anim)
-	
-	s.set_linear_velocity(lv)
+var hp = 1
+var score = 0
+var dead = false
+var attack = preload("res://Entity/Attack.gd")
+var smoke_effects = preload("res://Entity/Effects/Smoke.tscn")
+var score_effect = preload("res://Entity/Effects/Score.tscn")
+var controller
+var sound
 
 func _ready():
-	rc_left = get_node("Raycast_left")
-	rc_right = get_node("Raycast_right")
+	controller = get_node("/root/Controller")
+	sound = get_node("/root/SoundManager")
+	get_node("Hitbox").connect("body_enter", self, "_on_Hitbox_body_enter")
+	set_fixed_process(true)
+
+func _on_Hitbox_body_enter( body ):
+	if (body extends attack):
+		_get_hit()
+		sound.play_sfx("hit",true)
+		var controller = get_node("/root/Controller")
+		var map = controller.current_map
+		var player = controller.get_player()
+		controller.is_shaking = true
+		if (hp <= 0 and not dead):
+			_death()
+
+func _death():
+	dead = true
+	var instance = smoke_effects.instance()
+	var player = controller.get_player()
+	var score_instance = score_effect.instance()
+	controller.current_map.add_child(instance)
+	instance.play()
+	instance.set_global_pos(get_global_pos()-Vector2(0,16))
+	instance.set_scale(Vector2(1 - 2*player.sees_left,1))
+	controller.current_map.add_child(score_instance)
+	score_instance.set_global_pos(get_global_pos()-Vector2(0,-8))
+	score_instance.play(score)
+	controller.is_shaking = true
+	sound.play_sfx("woosh-3",true)
+	controller.get_player()._update_score(score, false)
+	queue_free()
+
+func _get_hit():
+	hp -= 1

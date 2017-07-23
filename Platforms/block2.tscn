@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
 [ext_resource path="res://TileSet/Tree.png" type="Texture" id=3]
 [ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Platforms/Oneway Platform.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entity/Jelly.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entity/Mark.tscn" type="PackedScene" id=7]
 
 [node name="TileMap" type="TileMap"]
 
@@ -24,18 +25,27 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -196588, 19, -65536, 19, -65532, 28, -65526, 19, -65517, 75, -65516, 74, -65515, 74, -65514, 74, -65513, 76, -65512, 19, -65511, 19, 0, 20, 1, 21, 2, 21, 3, 21, 4, 22, 9, 16, 10, 17, 11, 17, 12, 18, 18, 20, 19, 21, 20, 21, 21, 21, 22, 21, 23, 21, 24, 21, 25, 22, 65536, 24, 65537, 25, 65538, 25, 65539, 25, 65540, 26, 65554, 24, 65555, 25, 65556, 25, 65557, 25, 65558, 25, 65559, 25, 65560, 25, 65561, 26, 131072, 24, 131073, 25, 131074, 25, 131075, 25, 131076, 26, 131090, 24, 131091, 25, 131092, 25, 131093, 25, 131094, 25, 131095, 25, 131096, 25, 131097, 26, 196608, 24, 196609, 25, 196610, 25, 196611, 25, 196612, 26, 196626, 24, 196627, 25, 196628, 25, 196629, 25, 196630, 25, 196631, 25, 196632, 25, 196633, 26, 262144, 24, 262145, 25, 262146, 25, 262147, 25, 262148, 26, 262162, 24, 262163, 25, 262164, 25, 262165, 25, 262166, 25, 262167, 25, 262168, 25, 262169, 26, 327680, 24, 327681, 25, 327682, 25, 327683, 25, 327684, 26, 327698, 24, 327699, 25, 327700, 25, 327701, 25, 327702, 25, 327703, 25, 327704, 25, 327705, 26, 393216, 24, 393217, 25, 393218, 25, 393219, 25, 393220, 26, 393234, 24, 393235, 25, 393236, 25, 393237, 25, 393238, 25, 393239, 25, 393240, 25, 393241, 26, 458752, 24, 458753, 25, 458754, 25, 458755, 25, 458756, 26, 458770, 24, 458771, 25, 458772, 25, 458773, 25, 458774, 25, 458775, 25, 458776, 25, 458777, 26, 524288, 24, 524289, 25, 524290, 25, 524291, 25, 524292, 26, 524306, 24, 524307, 25, 524308, 25, 524309, 25, 524310, 25, 524311, 25, 524312, 25, 524313, 26, 589824, 24, 589825, 25, 589826, 25, 589827, 25, 589828, 26, 589842, 24, 589843, 25, 589844, 25, 589845, 25, 589846, 25, 589847, 25, 589848, 25, 589849, 26, 655360, 24, 655361, 25, 655362, 25, 655363, 25, 655364, 26, 655378, 24, 655379, 25, 655380, 25, 655381, 25, 655382, 25, 655383, 25, 655384, 25, 655385, 26, 720896, 24, 720897, 25, 720898, 25, 720899, 25, 720900, 26, 720914, 24, 720915, 25, 720916, 25, 720917, 25, 720918, 25, 720919, 25, 720920, 25, 720921, 26, 786432, 34, 786433, 35, 786434, 35, 786435, 35, 786436, 36, 786450, 34, 786451, 35, 786452, 35, 786453, 35, 786454, 35, 786455, 35, 786456, 35, 786457, 36 )
+tile_data = IntArray( -196588, 26, -65536, 26, -65532, 19, -65526, 26, -65517, 59, -65512, 26, -65511, 26, 0, 27, 1, 28, 2, 28, 3, 28, 4, 29, 9, 23, 10, 24, 11, 24, 12, 25, 18, 27, 19, 28, 20, 28, 21, 28, 22, 28, 23, 28, 24, 28, 25, 29, 65536, 31, 65537, 32, 65538, 32, 65539, 32, 65540, 33, 65554, 31, 65555, 32, 65556, 32, 65557, 32, 65558, 32, 65559, 32, 65560, 32, 65561, 33, 131072, 31, 131073, 32, 131074, 32, 131075, 32, 131076, 33, 131090, 31, 131091, 32, 131092, 32, 131093, 32, 131094, 32, 131095, 32, 131096, 32, 131097, 33, 196608, 31, 196609, 32, 196610, 32, 196611, 32, 196612, 33, 196626, 31, 196627, 32, 196628, 32, 196629, 32, 196630, 32, 196631, 32, 196632, 32, 196633, 33, 262144, 31, 262145, 32, 262146, 32, 262147, 32, 262148, 33, 262162, 31, 262163, 32, 262164, 32, 262165, 32, 262166, 32, 262167, 32, 262168, 32, 262169, 33, 327680, 31, 327681, 32, 327682, 32, 327683, 32, 327684, 33, 327698, 31, 327699, 32, 327700, 32, 327701, 32, 327702, 32, 327703, 32, 327704, 32, 327705, 33, 393216, 31, 393217, 32, 393218, 32, 393219, 32, 393220, 33, 393234, 31, 393235, 32, 393236, 32, 393237, 32, 393238, 32, 393239, 32, 393240, 32, 393241, 33, 458752, 31, 458753, 32, 458754, 32, 458755, 32, 458756, 33, 458770, 31, 458771, 32, 458772, 32, 458773, 32, 458774, 32, 458775, 32, 458776, 32, 458777, 33, 524288, 31, 524289, 32, 524290, 32, 524291, 32, 524292, 33, 524306, 31, 524307, 32, 524308, 32, 524309, 32, 524310, 32, 524311, 32, 524312, 32, 524313, 33, 589824, 31, 589825, 32, 589826, 32, 589827, 32, 589828, 33, 589842, 31, 589843, 32, 589844, 32, 589845, 32, 589846, 32, 589847, 32, 589848, 32, 589849, 33, 655360, 31, 655361, 32, 655362, 32, 655363, 32, 655364, 33, 655378, 31, 655379, 32, 655380, 32, 655381, 32, 655382, 32, 655383, 32, 655384, 32, 655385, 33, 720896, 31, 720897, 32, 720898, 32, 720899, 32, 720900, 33, 720914, 31, 720915, 32, 720916, 32, 720917, 32, 720918, 32, 720919, 32, 720920, 32, 720921, 33, 786432, 31, 786433, 32, 786434, 32, 786435, 32, 786436, 33, 786450, 31, 786451, 32, 786452, 32, 786453, 32, 786454, 32, 786455, 32, 786456, 32, 786457, 33 )
 script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 355, -54.5 )
 z/z = 2
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coins" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Coin" parent="Coins" instance=ExtResource( 4 )]
 
@@ -52,10 +62,6 @@ transform/pos = Vector2( 48, -48 )
 [node name="Coin3" parent="Coins" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 64, -48 )
-
-[node name="Coin4" parent="Coins" instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 64, -64 )
 
 [node name="Coin5" parent="Coins" instance=ExtResource( 4 )]
 
@@ -95,8 +101,14 @@ transform/pos = Vector2( 336, -48 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
+z/z = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Oneway Platform" parent="Platforms" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 48, -32 )
 
 [node name="Sprite" parent="Platforms/Oneway Platform"]
@@ -105,6 +117,7 @@ frame = 53
 
 [node name="Oneway Platform1" parent="Platforms" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 64, -32 )
 
 [node name="Sprite" parent="Platforms/Oneway Platform1"]
@@ -113,6 +126,7 @@ frame = 51
 
 [node name="Oneway Platform2" parent="Platforms" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 32, -32 )
 
 [node name="Sprite" parent="Platforms/Oneway Platform2"]
@@ -121,7 +135,8 @@ frame = 51
 
 [node name="Oneway Platform3" parent="Platforms" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 64, -48 )
+editor/display_folded = true
+transform/pos = Vector2( 65, -56 )
 
 [node name="Sprite" parent="Platforms/Oneway Platform3"]
 
@@ -129,23 +144,37 @@ frame = 53
 
 [node name="Oneway Platform4" parent="Platforms" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 48, -48 )
+editor/display_folded = true
+transform/pos = Vector2( 50, -56 )
 
 [node name="Sprite" parent="Platforms/Oneway Platform4"]
 
 frame = 53
 
-[node name="Oneway Platform5" parent="Platforms" instance=ExtResource( 5 )]
+[node name="TileMap" type="TileMap" parent="Platforms"]
 
-transform/pos = Vector2( 64, -64 )
-
-[node name="Sprite" parent="Platforms/Oneway Platform5"]
-
-frame = 51
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -65517, 62, -65516, 60, -65515, 60, -65514, 60, -65513, 61 )
 
 [node name="Land" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Land-platform" parent="Land" instance=ExtResource( 5 )]
 
@@ -201,21 +230,57 @@ frame = 102
 
 editor/display_folded = true
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Jelly" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 32, -48 )
+transform/pos = Vector2( 53, 0 )
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Jelly1" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 176, -48 )
+transform/pos = Vector2( 183, 1 )
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Jelly2" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 352, -80 )
+transform/pos = Vector2( 393, 0 )
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Jelly3" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 384, -49 )
+transform/pos = Vector2( 373, -32 )
+
+[node name="Marks" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Mark" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( -16, 32 )
+
+[node name="Mark1" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 48, 32 )
+
+[node name="Mark2" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 128, 32 )
+
+[node name="Mark3" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 192, 32 )
+
+[node name="Mark4" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 272, 32 )
+
+[node name="Mark5" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 400, 32 )
+
+[node name="Mark6" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 368, 0 )
+
+[node name="Mark7" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 288, 0 )
 
 
 [editable path="Platforms/Oneway Platform"]
@@ -223,7 +288,6 @@ transform/pos = Vector2( 384, -49 )
 [editable path="Platforms/Oneway Platform2"]
 [editable path="Platforms/Oneway Platform3"]
 [editable path="Platforms/Oneway Platform4"]
-[editable path="Platforms/Oneway Platform5"]
 [editable path="Land/Land-platform"]
 [editable path="Land/Land-platform1"]
 [editable path="Land/Land-platform2"]

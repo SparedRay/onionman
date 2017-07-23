@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://Platforms/Fill.gd" type="Script" id=2]
-[ext_resource path="res://Platforms/Moving Platform.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entity/Enemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://TileSet/Tree.png" type="Texture" id=6]
+[ext_resource path="res://TileSet/Tree.png" type="Texture" id=3]
+[ext_resource path="res://Platforms/Moving Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entity/Coin.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entity/Jelly.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entity/Mark.tscn" type="PackedScene" id=7]
 
 [node name="TileMap" type="TileMap"]
 
@@ -23,16 +24,27 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -131057, 16, -131056, 17, -131055, 17, -131054, 18, -131040, 20, -131039, 21, -131038, 21, -131037, 22, -65534, 19, -65532, 23, -65530, 19, -65504, 24, -65503, 25, -65502, 25, -65501, 26, 1, 20, 2, 21, 3, 21, 4, 21, 5, 21, 6, 21, 7, 22, 32, 24, 33, 25, 34, 25, 35, 26, 65537, 24, 65538, 25, 65539, 25, 65540, 25, 65541, 25, 65542, 25, 65543, 26, 65568, 24, 65569, 25, 65570, 25, 65571, 26, 131073, 24, 131074, 25, 131075, 25, 131076, 25, 131077, 25, 131078, 25, 131079, 26, 131104, 24, 131105, 25, 131106, 25, 131107, 26, 196609, 24, 196610, 25, 196611, 25, 196612, 25, 196613, 25, 196614, 25, 196615, 26, 196640, 24, 196641, 25, 196642, 25, 196643, 26, 262145, 24, 262146, 25, 262147, 25, 262148, 25, 262149, 25, 262150, 25, 262151, 26, 262176, 24, 262177, 25, 262178, 25, 262179, 26, 327681, 24, 327682, 25, 327683, 25, 327684, 25, 327685, 25, 327686, 25, 327687, 26, 327712, 24, 327713, 25, 327714, 25, 327715, 26, 393217, 24, 393218, 25, 393219, 25, 393220, 25, 393221, 25, 393222, 25, 393223, 26, 393248, 24, 393249, 25, 393250, 25, 393251, 26, 458753, 24, 458754, 25, 458755, 25, 458756, 25, 458757, 25, 458758, 25, 458759, 26, 458784, 24, 458785, 25, 458786, 25, 458787, 26, 524289, 24, 524290, 25, 524291, 25, 524292, 25, 524293, 25, 524294, 25, 524295, 26, 524320, 24, 524321, 25, 524322, 25, 524323, 26, 589825, 24, 589826, 25, 589827, 25, 589828, 25, 589829, 25, 589830, 25, 589831, 26, 589856, 24, 589857, 25, 589858, 25, 589859, 26, 655361, 24, 655362, 25, 655363, 25, 655364, 25, 655365, 25, 655366, 25, 655367, 26, 655392, 24, 655393, 25, 655394, 25, 655395, 26, 720897, 24, 720898, 25, 720899, 25, 720900, 25, 720901, 25, 720902, 25, 720903, 26, 720928, 24, 720929, 25, 720930, 25, 720931, 26, 786433, 24, 786434, 25, 786435, 25, 786436, 25, 786437, 25, 786438, 25, 786439, 26, 786464, 24, 786465, 25, 786466, 25, 786467, 26, 851969, 24, 851970, 25, 851971, 25, 851972, 25, 851973, 25, 851974, 25, 851975, 26, 852000, 24, 852001, 25, 852002, 25, 852003, 26, 917505, 24, 917506, 25, 917507, 25, 917508, 25, 917509, 25, 917510, 25, 917511, 26, 917536, 24, 917537, 25, 917538, 25, 917539, 26, 983041, 24, 983042, 25, 983043, 25, 983044, 25, 983045, 25, 983046, 25, 983047, 26, 983072, 24, 983073, 25, 983074, 25, 983075, 26, 1048577, 24, 1048578, 25, 1048579, 25, 1048580, 25, 1048581, 25, 1048582, 25, 1048583, 26, 1048608, 24, 1048609, 25, 1048610, 25, 1048611, 26, 1114113, 24, 1114114, 25, 1114115, 25, 1114116, 25, 1114117, 25, 1114118, 25, 1114119, 26, 1114144, 24, 1114145, 25, 1114146, 25, 1114147, 26, 1179649, 24, 1179650, 25, 1179651, 25, 1179652, 25, 1179653, 25, 1179654, 25, 1179655, 26, 1179680, 24, 1179681, 25, 1179682, 25, 1179683, 26, 1245185, 24, 1245186, 25, 1245187, 25, 1245188, 25, 1245189, 25, 1245190, 25, 1245191, 26, 1245216, 24, 1245217, 25, 1245218, 25, 1245219, 26, 1310721, 34, 1310722, 35, 1310723, 35, 1310724, 35, 1310725, 35, 1310726, 35, 1310727, 36, 1310752, 34, 1310753, 36, 1310754, 36, 1310755, 35 )
+tile_data = IntArray( -131057, 23, -131056, 24, -131055, 24, -131054, 25, -131040, 27, -131039, 28, -131038, 28, -131037, 29, -65534, 26, -65532, 13, -65530, 26, -65504, 31, -65503, 32, -65502, 32, -65501, 33, 0, 1, 1, 27, 2, 28, 3, 28, 4, 28, 5, 28, 6, 28, 7, 29, 32, 31, 33, 32, 34, 32, 35, 33, 65537, 31, 65538, 32, 65539, 32, 65540, 32, 65541, 32, 65542, 32, 65543, 33, 65568, 31, 65569, 32, 65570, 32, 65571, 33, 131073, 31, 131074, 32, 131075, 32, 131076, 32, 131077, 32, 131078, 32, 131079, 33, 131104, 31, 131105, 32, 131106, 32, 131107, 33, 196609, 31, 196610, 32, 196611, 32, 196612, 32, 196613, 32, 196614, 32, 196615, 33, 196640, 31, 196641, 32, 196642, 32, 196643, 33, 262145, 31, 262146, 32, 262147, 32, 262148, 32, 262149, 32, 262150, 32, 262151, 33, 262176, 31, 262177, 32, 262178, 32, 262179, 33, 327681, 31, 327682, 32, 327683, 32, 327684, 32, 327685, 32, 327686, 32, 327687, 33, 327712, 31, 327713, 32, 327714, 32, 327715, 33, 393217, 31, 393218, 32, 393219, 32, 393220, 32, 393221, 32, 393222, 32, 393223, 33, 393248, 31, 393249, 32, 393250, 32, 393251, 33, 458753, 31, 458754, 32, 458755, 32, 458756, 32, 458757, 32, 458758, 32, 458759, 33, 458784, 31, 458785, 32, 458786, 32, 458787, 33, 524289, 31, 524290, 32, 524291, 32, 524292, 32, 524293, 32, 524294, 32, 524295, 33, 524320, 31, 524321, 32, 524322, 32, 524323, 33, 589825, 31, 589826, 32, 589827, 32, 589828, 32, 589829, 32, 589830, 32, 589831, 33, 589856, 31, 589857, 32, 589858, 32, 589859, 33, 655361, 31, 655362, 32, 655363, 32, 655364, 32, 655365, 32, 655366, 32, 655367, 33, 655392, 31, 655393, 32, 655394, 32, 655395, 33, 720897, 31, 720898, 32, 720899, 32, 720900, 32, 720901, 32, 720902, 32, 720903, 33, 720928, 31, 720929, 32, 720930, 32, 720931, 33, 786433, 31, 786434, 32, 786435, 32, 786436, 32, 786437, 32, 786438, 32, 786439, 33, 786464, 31, 786465, 32, 786466, 32, 786467, 33, 851969, 31, 851970, 32, 851971, 32, 851972, 32, 851973, 32, 851974, 32, 851975, 33, 852000, 31, 852001, 32, 852002, 32, 852003, 33, 917505, 31, 917506, 32, 917507, 32, 917508, 32, 917509, 32, 917510, 32, 917511, 33, 917536, 31, 917537, 32, 917538, 32, 917539, 33, 983041, 31, 983042, 32, 983043, 32, 983044, 32, 983045, 32, 983046, 32, 983047, 33, 983072, 31, 983073, 32, 983074, 32, 983075, 33, 1048577, 31, 1048578, 32, 1048579, 32, 1048580, 32, 1048581, 32, 1048582, 32, 1048583, 33, 1048608, 31, 1048609, 32, 1048610, 32, 1048611, 33, 1114113, 31, 1114114, 32, 1114115, 32, 1114116, 32, 1114117, 32, 1114118, 32, 1114119, 33, 1114144, 31, 1114145, 32, 1114146, 32, 1114147, 33, 1179649, 31, 1179650, 32, 1179651, 32, 1179652, 32, 1179653, 32, 1179654, 32, 1179655, 33, 1179680, 31, 1179681, 32, 1179682, 32, 1179683, 33, 1245185, 31, 1245186, 32, 1245187, 32, 1245188, 32, 1245189, 32, 1245190, 32, 1245191, 33, 1245216, 31, 1245217, 32, 1245218, 32, 1245219, 33, 1310721, 31, 1310722, 32, 1310723, 32, 1310724, 32, 1310725, 32, 1310726, 32, 1310727, 33, 1310752, 31, 1310753, 32, 1310754, 32, 1310755, 33 )
 script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="MovingPlatform" parent="." instance=ExtResource( 3 )]
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 544, -54.5 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MovingPlatform" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 192, -160 )
-motion = Vector2( 0, 140 )
+motion = Vector2( 0, 125 )
 cycle = 5.0
 
-[node name="MovingPlatform1" parent="." instance=ExtResource( 3 )]
+[node name="MovingPlatform1" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 464, -64 )
 motion = Vector2( -100, 0 )
@@ -41,74 +53,101 @@ cycle = 5.0
 [node name="Coins" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Coin" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 32, -16 )
 
-[node name="Coin1" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin1" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 48, -16 )
 
-[node name="Coin2" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin2" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 96, -16 )
 
-[node name="Coin3" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin3" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 112, -16 )
 
-[node name="Coin4" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin4" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 256, -48 )
 
-[node name="Coin5" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin5" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 272, -48 )
 
-[node name="Coin6" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin6" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 288, -48 )
 
-[node name="Coin7" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin7" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 528, -48 )
 
-[node name="Coin8" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin8" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 544, -48 )
 
-[node name="Coin9" parent="Coins" instance=ExtResource( 4 )]
+[node name="Coin9" parent="Coins" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 560, -48 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
 editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Jelly" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 32, -32 )
+transform/pos = Vector2( 55, 0 )
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Jelly1" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 80, -32 )
+transform/pos = Vector2( 104, 0 )
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Jelly2" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 240, -64 )
+transform/pos = Vector2( 256, -32 )
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Jelly3" parent="Enemies" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 256, -64 )
+transform/pos = Vector2( 288, -32 )
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
+[node name="Marks" type="Node2D" parent="."]
 
-transform/pos = Vector2( 528, -64 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Mark" parent="Marks" instance=ExtResource( 7 )]
 
-transform/pos = Vector2( 544, -54.5 )
-texture = ExtResource( 6 )
+transform/pos = Vector2( 0, 32 )
+
+[node name="Mark1" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 48, 32 )
+
+[node name="Mark5" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 64, 32 )
+
+[node name="Mark2" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 112, 32 )
+
+[node name="Mark3" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 224, 0 )
+
+[node name="Mark4" parent="Marks" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 288, 0 )
 
 

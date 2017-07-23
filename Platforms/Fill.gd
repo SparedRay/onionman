@@ -15,7 +15,7 @@ func _generate_enemies():
 		randomize()
 		var set_enemy = floor(rand_range(0, 2))
 		if (set_enemy != 0):
-			enemy._die()
+			enemy.queue_free()
 
 func _ready():
 	# Called every time the node is added to the scene.
