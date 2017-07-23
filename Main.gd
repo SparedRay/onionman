@@ -2,10 +2,12 @@ extends Node2D
 
 const map_names = { "res://Menu.tscn":"Title",
 					"res://Story/Intro.tscn":"Intro",
-					"res://Worlds/World1.tscn":"World1" }
+					"res://Worlds/World1.tscn":"World1",
+					"res://Story/World1_end.tscn":"World1_end"}
 const map_songs = {	"World1":"res://UI/Music/mushroom_dance.ogg",
 					"Intro":"res://UI/Music/Grasslands Theme.ogg",
 					"Title":"res://UI/Music/Busy Day At The Market-LOOP.ogg",
+					"World1_end":"res://UI/Music/act1_end.ogg",
 					"gameover":null, }
 
 var c
@@ -26,7 +28,7 @@ func _on_DeathTimer_timeout():
 	c.death = false
 	change_map(c.current_map_name, c.checkpoint)
 	var map_song = map_songs[map_names[c.current_map_name]]
-	if (c.snd_manager.get_stream_name() != map_song):
+	if (c.snd_manager.get_stream().get_path() != map_song):
 		c.snd_manager.change_song(map_song)
 
 func change_map(map, cp):
@@ -61,13 +63,14 @@ func change_map(map, cp):
 				if (cps.id == c.checkpoint):
 					c.player = c.get_player()
 					c.player.set_global_pos(cps.get_global_pos()-Vector2(0,-1))
-		load_timer.set_wait_time(0.75)
+		load_timer.set_wait_time(0.25)
 		load_timer.start()
 		load_state = 2
 	else:
 		c.end_cutscene()
-		if (map_names[c.current_map_name] != "Title"):
+		if (map_names[c.current_map_name] == "World1"):
 			c.ui.show()
+			get_node("UI/Inner/Clock/Timer").start()
 		c.fader.play("In")
 		load_state = 0
 

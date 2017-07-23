@@ -51,6 +51,7 @@ func _on_Detect_body_enter( body ):
 			
 			anim.play("Stunned")
 			timer.start()
+			shake()
 
 func _on_Timer_timeout():
 	if (state == WAIT_IDLE):
@@ -74,11 +75,18 @@ func shoot():
 func _death():
 	active = false
 	state = 99
-	
-	print("Dead")
+	anim.play("Death")
 	dead = true
 	get_node("Hitbox").queue_free()
 	get_node("Hurtbox").queue_free()
+
+func _smoke():
+	var instance = smoke_effects.instance()
+	controller.current_map.add_child(instance)
+	instance.play()
+	instance.set_global_pos(get_global_pos()-Vector2(0,16))
+	shake()
+	get_node("Sprite").hide()
 
 func rumble():
 	sound.play_sfx("rumble")

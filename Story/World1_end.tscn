@@ -1,185 +1,237 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://TileSet/cave.tres" type="TileSet" id=1]
-[ext_resource path="res://TileSet/boss_tiles.png" type="Texture" id=2]
-[ext_resource path="res://Entity/Boss.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Entity/Mark.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entity/Checkpoint.tscn" type="PackedScene" id=5]
-[ext_resource path="res://TileSet/sign.png" type="Texture" id=6]
+[ext_resource path="res://Story/cake.png" type="Texture" id=2]
+[ext_resource path="res://Story/flare.png" type="Texture" id=3]
+[ext_resource path="res://Entity/entity.png" type="Texture" id=4]
+[ext_resource path="res://TileSet/Emotions.png" type="Texture" id=5]
+[ext_resource path="res://Entity/Effects/blackhole_shader.tres" type="Shader" id=6]
+[ext_resource path="res://Entity/Effects/white.png" type="Texture" id=7]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
 
-custom_solver_bias = 0.0
-extents = Vector2( 9, 12 )
+script/source = "extends TileMap
 
-[sub_resource type="GDScript" id=2]
-
-script/source = "
-extends \"res://Story/Cutscene.gd\"
-
-var hp = 0
-var hpmax = 1
-var timer
-var snd
-var cp
-var boss
-var state = 0
-var boss_song = \"res://UI/Music/boss_theme.ogg\"
+var c
+var player_sprite
 
 func _ready():
-	check = \"1ArenaBeat\"
-	show()
-	timer = get_node(\"Timer\")
-	text = [\"You got a Lifeforce Crystal!\", \"Your shield will regenerate faster now.\"]
-	var test = get_node(\"/root/Global\").checks
-	cp = get_node(\"Checkpoint\")
-	if (test[check]):
-		cp.set_pos(Vector2(0,0))
-		cp.show()
-	snd = get_node(\"/root/SoundManager\")
-	boss = get_node(\"Boss\")
+	c = get_node(\"/root/Controller\")
+	player_sprite = get_node(\"Player\")
+	c.ui.hide()
+	c.cam_target = player_sprite
+	get_node(\"Animation\").play(\"Animation\")
 
-func _on_Area2D_body_enter( body ):
-	if (state == 0 and body extends player_class):
-		var test = get_node(\"/root/Global\").checks
-		if (check == null or (check != null and not test[check])):
-			controller.begin_cutscene()
-			controller.cam_target = self
-			controller.snd_manager.change_song(\"sfx_pew\")
-			timer.start()
-			state = 0
+func _start_shaking():
+	get_node(\"Timer\").start()
 
-func shake():
-	controller.is_shaking = true
+func _player_anim(anim):
+	get_node(\"Player/Animation\").play(anim)
 
-func rumble():
-	controller.snd_manager.play_sfx(\"sfx_pew\")
+func _cake_anim(anim):
+	get_node(\"Cake/Animation\").play(anim)
 
-func _fixed_process(delta):
-	if (state == 1):
-		if (hp < hpmax):
-#			snd.play_sfx(\"dot\",true)
-			hp += 10
-			controller.bosshp.update(hp)
-		else:
-			timer.start()
-			state = 2
-	if (state == 2):
-		if (boss.hp > 0):
-			controller.bosshp.update(boss.hp)
-		else:
-			controller.hide_bosshp()
-			controller.begin_cutscene()
-			state = 3
-			timer.start()
-			set_fixed_process(false)
+func _hole_anim():
+	get_node(\"Blackhole/Animation\").play(\"Spin\")
+
+func _end_game():
+	c.root.change_map(\"res://Menu.tscn\", 0)
 
 func _on_Timer_timeout():
-#	snd.change_song()
-	if (state == 0):
-		state = 1
-		get_node(\"Walls\").play(\"Close\")
-		timer.start()
-	elif (state == 1):
-		hpmax = boss.hp
-		hp = 0
-		controller.show_bosshp(hpmax)
-		snd.change_song(boss_song)
-		snd.set_loop(true)
-		snd.set_loop_restart_time(6.88)
-		set_fixed_process(true)
-	elif (state == 2):
-		boss.active = true
-		controller.end_cutscene()
-	elif (state == 3):
-		var player = controller.get_player()
-		controller.cam_target = player
-#		controller.snd_manager.play_sfx(\"fanfare\")
-#		controller.change_face(\"Excited\")
-#		player.top_sprite.play(\"Victory\")
-#		player.bot_sprite.play(\"Victory\")
-#		player.effects.play(\"UpShield\")
-		controller.begin_cutscene()
-#		controller.show_text(text)
-		var progress = get_node(\"/root/Global\").checks
-		progress[check] = true
-#		progress[\"1ShieldUpgrade\"] = true
-		get_node(\"Walls\").play(\"Open\")
-#		cp.set_pos(Vector2(0,0))
-#		get_node(\"CP\").play(\"Fade\")
-#		cp.show()
-		controller.root.change_map(\"res://Story/World1_end.tscn\", 0)"
+	c.is_shaking = true
+"
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
-resource/name = "Close"
-length = 1.0
+resource/name = "Animation"
+length = 14.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Wall:transform/pos")
+tracks/0/path = NodePath("Player:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 4.2, 4.3, 4.4, 9.6, 9.8, 10, 10.2, 10.4, 10.6 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 6.49802 ),
+"update": 0,
+"values": [ Vector2( 563, 48 ), Vector2( 563, 48 ), Vector2( 563, 47 ), Vector2( 563, 48 ), Vector2( 563, 48 ), Vector2( 591, 28 ), Vector2( 640, 18 ), Vector2( 641, -16 ), Vector2( 617, 7 ), Vector2( 633, -3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player:transform/rot")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 7, 12 ),
+"transitions": FloatArray( 1, 4.59479 ),
+"update": 0,
+"values": [ 0.0, 18000.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Emotions:frame")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 2.1, 3.1, 4.6 ),
+"transitions": FloatArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 38, 36, 28, 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Player:visibility/visible")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = {
+"times": FloatArray( 0, 11 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cake:transform/pos")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = {
+"times": FloatArray( 0, 2.1, 4 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 631, 72 ), Vector2( 631, 72 ), Vector2( 631, 8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Cake:visibility/visible")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = {
+"times": FloatArray( 0, 11 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Blackhole:transform/scale")
+tracks/6/interp = 1
+tracks/6/imported = false
+tracks/6/keys = {
+"times": FloatArray( 5.5, 6.4, 10.8, 11, 11.2 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 0, 0 ) ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/imported = false
+tracks/7/keys = {
+"times": FloatArray( 2.1, 4.5, 5.5, 13.1 ),
+"transitions": FloatArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ "Shine" ],
+"method": "_cake_anim"
+}, {
+"args": [  ],
+"method": "_start_shaking"
+}, {
+"args": [  ],
+"method": "_hole_anim"
+}, {
+"args": [  ],
+"method": "_end_game"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "Shine"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shine:transform/rot")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0, 1 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -137, -73 ), Vector2( -137, 7 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0, 0.5, 1 ),
-"transitions": FloatArray( 1, 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "shake"
-}, {
-"args": [  ],
-"method": "shake"
-}, {
-"args": [  ],
-"method": "shake"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/imported = false
-tracks/2/keys = {
-"times": FloatArray( 1 ),
-"transitions": FloatArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "rumble"
-} ]
+"values": [ 0.0, 90.0 ]
 }
 
 [sub_resource type="Animation" id=4]
 
-resource/name = "Open"
-length = 1.0
+resource/name = "Die"
+length = 0.2
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Wall:transform/pos")
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "Idle"
+length = 0.2
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=6]
+
+resource/name = "Run"
+length = 0.4
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ 9, 10 ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=7]
+
+shader/shader = ExtResource( 6 )
+shader/shading_mode = 0
+shader_param/strength = 0.01
+shader_param/black_radius = 0.65
+
+[sub_resource type="Animation" id=8]
+
+resource/name = "Spin"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/rot")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0, 1 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -137, 7 ), Vector2( -137, -73 ) ]
+"values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-
-custom_solver_bias = 0.0
-extents = Vector2( 10, 40 )
-
-[node name="BossFight" type="TileMap"]
+[node name="World1_end" type="TileMap"]
 
 mode = 0
 tile_set = ExtResource( 1 )
@@ -196,6 +248,7 @@ collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray( -1310709, 15, -1310652, 17, -1245173, 15, -1245116, 17, -1179637, 15, -1179594, 28, -1179580, 17, -1114101, 15, -1114060, 28, -1114044, 17, -1048565, 15, -1048542, 28, -1048508, 17, -983029, 15, -982999, 28, -982989, 27, -982985, 28, -982982, 27, -982972, 17, -917493, 15, -917472, 27, -917467, 27, -917457, 27, -917436, 17, -851957, 39, -851956, 40, -851940, 28, -851901, 27, -851900, 17, -786420, 39, -786419, 40, -786398, 536870952, -786397, 536870935, -786396, 536870935, -786395, 536870935, -786394, 23, -786393, 23, -786392, 23, -786391, 23, -786390, 23, -786389, 23, -786388, 23, -786387, 40, -786364, 17, -720883, 22, -720882, 23, -720881, 23, -720880, 23, -720879, 23, -720878, 23, -720877, 40, -720863, 536870952, -720862, 536870953, -720857, 70, -720851, 41, -720850, 40, -720828, 17, -655341, 41, -655340, 40, -655328, 536870952, -655327, 536870953, -655321, 70, -655314, 41, -655313, 40, -655299, 28, -655292, 17, -589804, 39, -589803, 40, -589798, 28, -589792, 17, -589785, 70, -589777, 15, -589756, 17, -524267, 15, -524264, 27, -524259, 27, -524256, 17, -524249, 70, -524241, 15, -524220, 17, -458731, 15, -458720, 17, -458717, 78, -458716, 75, -458713, 70, -458705, 15, -458692, 28, -458684, 17, -393195, 22, -393194, 23, -393193, 23, -393192, 23, -393191, 23, -393190, 23, -393189, 23, -393188, 23, -393187, 23, -393186, 23, -393185, 23, -393184, 24, -393177, 70, -393174, 78, -393173, 536870997, -393169, 15, -393167, 28, -393152, 28, -393148, 17, -327659, 63, -327658, 64, -327654, 70, -327641, 70, -327633, 15, -327612, 17, -262122, 65, -262118, 70, -262108, 93, -262105, 70, -262097, 15, -262083, 28, -262076, 17, -196587, 66, -196586, 67, -196584, 93, -196582, 76, -196580, 93, -196569, 70, -196561, 15, -196540, 17, -131051, 68, -131050, 69, -131046, 76, -131033, 70, -131025, 15, -131023, 27, -131012, 27, -131004, 17, -65533, 25, -65532, 25, -65531, 25, -65530, 26, -65515, 68, -65514, 69, -65511, 79, -65510, 80, -65509, 81, -65497, 70, -65489, 15, -65473, 28, -65468, 17, 1, 0, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 1, 11, 1, 12, 1, 13, 1, 14, 1, 15, 2, 20, 0, 21, 3, 22, 3, 23, 3, 24, 3, 25, 3, 26, 3, 27, 3, 28, 3, 29, 3, 30, 3, 31, 3, 32, 3, 39, 70, 47, 15, 68, 17, 65537, 15, 65538, 16, 65550, 28, 65551, 17, 65556, 15, 65557, 27, 65567, 28, 65568, 17, 65575, 76, 65583, 15, 65586, 28, 65604, 17, 131073, 15, 131075, 28, 131079, 28, 131081, 27, 131084, 28, 131087, 17, 131092, 15, 131095, 28, 131101, 27, 131104, 17, 131111, 76, 131119, 15, 131133, 28, 131140, 17, 196609, 15, 196623, 17, 196628, 15, 196640, 17, 196646, 79, 196647, 80, 196648, 81, 196655, 15, 196676, 17, 262145, 15, 262156, 28, 262159, 17, 262164, 15, 262170, 28, 262176, 24, 262177, 3, 262178, 3, 262179, 3, 262180, 3, 262181, 3, 262182, 3, 262183, 3, 262184, 3, 262185, 3, 262186, 3, 262187, 3, 262188, 3, 262189, 3, 262190, 3, 262191, 22, 262196, 27, 262212, 17, 327681, 15, 327685, 28, 327695, 17, 327700, 15, 327708, 28, 327725, 28, 327728, 27, 327748, 17, 393217, 15, 393218, 27, 393225, 27, 393231, 17, 393236, 15, 393240, 27, 393248, 27, 393251, 27, 393254, 28, 393256, 28, 393258, 27, 393284, 17, 458753, 15, 458767, 17, 458772, 15, 458774, 28, 458788, 28, 458803, 28, 458820, 17, 524289, 15, 524292, 27, 524303, 17, 524308, 15, 524329, 28, 524331, 27, 524335, 28, 524356, 17, 589825, 15, 589839, 17, 589844, 15, 589852, 28, 589857, 28, 589881, 28, 589892, 17, 655361, 15, 655371, 27, 655375, 17, 655380, 15, 655396, 28, 655428, 17, 720897, 15, 720911, 17, 720916, 15, 720919, 28, 720940, 28, 720964, 17, 786433, 15, 786447, 17, 786452, 15, 786463, 27, 786500, 17, 851969, 15, 851974, 27, 851983, 17, 851988, 15, 852036, 17, 917505, 15, 917519, 17, 917524, 15, 917572, 17, 983041, 15, 983052, 27, 983055, 17, 983060, 15, 983108, 17, 1048577, 15, 1048591, 17, 1048596, 15, 1048644, 17, 1114113, 15, 1114127, 17, 1114132, 15, 1114180, 17, 1179649, 15, 1179663, 17, 1179668, 15, 1179716, 17, 1245185, 15, 1245199, 17, 1245204, 15, 1245252, 17, 1310721, 15, 1310735, 17, 1310740, 15, 1310788, 17, 1376257, 15, 1376271, 17, 1376276, 15, 1376324, 17, 1441793, 15, 1441807, 17, 1441812, 15, 1441860, 17, 1507329, 15, 1507343, 17, 1507348, 15, 1507396, 17, 1572865, 15, 1572879, 17, 1572884, 15, 1572932, 17, 1638401, 15, 1638415, 17, 1638420, 15, 1638468, 17, 1703937, 15, 1703951, 17, 1703956, 15, 1704004, 17, 1769473, 15, 1769487, 17, 1769492, 15, 1769540, 17 )
+script/script = SubResource( 1 )
 
 [node name="Fills" type="Node2D" parent="."]
 
@@ -222,6 +275,7 @@ invert/border = 100.0
 
 [node name="Polygon2D 2" type="Polygon2D" parent="Fills"]
 
+z/z = 2
 polygon = Vector2Array( 336, 16, 512, 16, 512, 80, 768, 80, 768, -160, 752, -160, 752, -176, 736, -176, 736, -192, 544, -192, 544, -176, 528, -176, 528, -160, 512, -160, 512, -96, 352, -96, 352, -144, 336, -144, 336, -160, 320, -160, 320, -176, 224, -176, 224, -192, 208, -192, 208, -208, 192, -208, 192, -320, 1104, -320, 1104, 448, 336, 448 )
 uv = Vector2Array(  )
 color = Color( 0.411765, 0.247059, 0.333333, 1 )
@@ -250,6 +304,7 @@ invert/border = 100.0
 
 [node name="Platform" type="TileMap" parent="."]
 
+z/z = 2
 mode = 0
 tile_set = ExtResource( 1 )
 cell/size = Vector2( 16, 16 )
@@ -264,167 +319,128 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray(  )
-
-[node name="Spikes" type="Node2D" parent="."]
-
+tile_data = IntArray( -65484, 28, 131102, 27, 131121, 27, 196635, 28, 262180, 3, 262181, 3, 262182, 3, 262183, 3, 262184, 3, 262185, 3, 262186, 3, 262187, 3, 327717, 28, 327733, 28, 393243, 27, 393258, 27, 393261, 28, 458784, 28, 458787, 28, 524332, 28, 524337, 27, 589868, 28, 655398, 27 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Area" type="Area2D" parent="."]
-
-editor/display_folded = true
-transform/pos = Vector2( 649, -7 )
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -40, 59 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = SubResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
-
-transform/pos = Vector2( -40, 59 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Timer" type="Timer" parent="Area"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = true
-autostart = false
-
-[node name="Walls" type="AnimationPlayer" parent="Area"]
+[node name="Animation" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Close = SubResource( 3 )
-anims/Open = SubResource( 4 )
+anims/Animation = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="Wall" type="KinematicBody2D" parent="Area"]
+[node name="Cake" type="Sprite" parent="."]
 
 editor/display_folded = true
-transform/pos = Vector2( -137, -73 )
-input/pickable = false
-shapes/0/shape = SubResource( 5 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 8, -40 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprites" type="Node2D" parent="Area/Wall"]
-
-editor/display_folded = true
-z/z = -1
+transform/pos = Vector2( 631, 72 )
+z/z = 1
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Area/Wall/Sprites"]
+[node name="Shine" type="Sprite" parent="Cake"]
 
-transform/pos = Vector2( 0, -80 )
-texture = ExtResource( 2 )
-centered = false
-vframes = 23
-hframes = 25
-frame = 80
+z/z = -1
+texture = ExtResource( 3 )
 
-[node name="Sprite1" type="Sprite" parent="Area/Wall/Sprites"]
+[node name="Animation" type="AnimationPlayer" parent="Cake"]
 
-transform/pos = Vector2( 0, -64 )
-texture = ExtResource( 2 )
-centered = false
-vframes = 23
-hframes = 25
-frame = 80
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Shine = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
-[node name="Sprite2" type="Sprite" parent="Area/Wall/Sprites"]
+[node name="Player" type="Sprite" parent="."]
 
-transform/pos = Vector2( 0, -48 )
-texture = ExtResource( 2 )
-centered = false
-vframes = 23
-hframes = 25
-frame = 80
+editor/display_folded = true
+transform/pos = Vector2( 563, 48 )
+texture = ExtResource( 4 )
+vframes = 14
+hframes = 8
+frame = 8
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Sprite3" type="Sprite" parent="Area/Wall/Sprites"]
+[node name="Emotions" type="Sprite" parent="Player"]
 
-transform/pos = Vector2( 0, -32 )
-texture = ExtResource( 2 )
-centered = false
-vframes = 23
-hframes = 25
-frame = 80
+transform/pos = Vector2( 1, -3 )
+texture = ExtResource( 5 )
+vframes = 7
+hframes = 6
+frame = 38
 
-[node name="Sprite4" type="Sprite" parent="Area/Wall/Sprites"]
+[node name="Animation" type="AnimationPlayer" parent="Player"]
 
-transform/pos = Vector2( 0, -16 )
-texture = ExtResource( 2 )
-centered = false
-vframes = 23
-hframes = 25
-frame = 80
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Die = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Run = SubResource( 6 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area/Wall"]
+[node name="Blackhole" type="Node2D" parent="."]
 
-visibility/visible = false
-transform/pos = Vector2( 8, -40 )
-shape = SubResource( 5 )
-trigger = false
-_update_shape_index = 0
+editor/display_folded = true
+transform/pos = Vector2( 632, 4 )
+transform/scale = Vector2( 1e-05, 1e-05 )
+z/z = 4
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TextureFrame" type="TextureFrame" parent="Blackhole"]
+
+material/material = SubResource( 7 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -32.0
+margin/top = -32.0
+margin/right = 32.0
+margin/bottom = 32.0
+texture = ExtResource( 7 )
+stretch_mode = 0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Boss" parent="Area" instance=ExtResource( 3 )]
+[node name="Animation" type="AnimationPlayer" parent="Blackhole"]
 
-transform/pos = Vector2( 78, 71 )
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Spin = SubResource( 8 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
-[node name="Marks" type="Node2D" parent="."]
+[node name="Timer" type="Timer" parent="."]
 
-editor/display_folded = true
-__meta__ = {
-"_edit_lock_": true
-}
+process_mode = 1
+wait_time = 0.5
+one_shot = false
+autostart = false
 
-[node name="Mark" parent="Marks" instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 736, 84 )
-
-[node name="Mark1" parent="Marks" instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 510, 84 )
-
-[node name="Checkpoint" parent="." instance=ExtResource( 5 )]
-
-editor/display_folded = true
-transform/pos = Vector2( 164, 0 )
-id = 10
-
-[node name="Sprite" parent="Checkpoint"]
-
-texture = ExtResource( 6 )
-
-[connection signal="timeout" from="Area/Timer" to="Area" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 
-[editable path="Checkpoint"]

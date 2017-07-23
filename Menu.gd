@@ -24,7 +24,7 @@ func _process(delta):
 		get_node("Button/Blink").play("Pressed")
 		get_node("Button/Sound").play("sfx_select")
 		c.begin_cutscene()
-		c.root.change_map("res://Worlds/World1.tscn",0)
+		c.root.change_map("res://Story/Intro.tscn",0)
 
 func _update_credits():
 	credits_text.set_text(credits[credits_index])

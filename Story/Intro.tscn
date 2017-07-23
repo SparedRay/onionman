@@ -1,23 +1,29 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=16 format=1]
 
-[ext_resource path="res://UI/CRTFrame.png" type="Texture" id=1]
-[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=2]
-[ext_resource path="res://TileSet/House.png" type="Texture" id=3]
-[ext_resource path="res://Entity/entity.png" type="Texture" id=4]
-[ext_resource path="res://TileSet/Emotions.png" type="Texture" id=5]
-[ext_resource path="res://Parallax/ParallaxBackground.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Story/cake.png" type="Texture" id=7]
-[ext_resource path="res://Story/flare.png" type="Texture" id=8]
+[ext_resource path="res://TileSet/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://TileSet/House.png" type="Texture" id=2]
+[ext_resource path="res://Entity/entity.png" type="Texture" id=3]
+[ext_resource path="res://TileSet/Emotions.png" type="Texture" id=4]
+[ext_resource path="res://Parallax/ParallaxBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Story/cake.png" type="Texture" id=6]
+[ext_resource path="res://Story/flare.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends Node2D
 
-func _change_scene():
-	get_tree().change_scene(\"res://Game.tscn\")
+var c
+var player_sprite
 
-func _out_scene():
-	get_node(\"TransitionAnim\").play(\"Out\")
+func _ready():
+	player_sprite = get_node(\"Player\")
+	c = get_node(\"/root/Controller\")
+	c.ui.hide()
+	c.cam_target = player_sprite
+	_init_story()
+
+func _change_scene():
+	c.root.change_map(\"res://Worlds/World1.tscn\",0)
 
 func _init_story():
 	get_node(\"Animation\").play(\"Intro\")
@@ -45,64 +51,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 
-resource/name = "In"
-length = 1.0
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Camera/Transition:transform/pos")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.9 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -128, -68 ), Vector2( -496, -68 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0.9 ),
-"transitions": FloatArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_init_story"
-} ]
-}
-
-[sub_resource type="Animation" id=4]
-
-resource/name = "Out"
-length = 1.0
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Camera/Transition:transform/pos")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.9 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 250, -68 ), Vector2( -128, -68 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0.9 ),
-"transitions": FloatArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_change_scene"
-} ]
-}
-
-[sub_resource type="Animation" id=5]
-
 length = 0.1
 loop = true
 step = 0.1
@@ -117,7 +65,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 
 length = 0.2
 loop = true
@@ -133,7 +81,7 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 
 length = 0.2
 loop = true
@@ -149,7 +97,7 @@ tracks/0/keys = {
 "values": [ 8 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 
 length = 0.2
 loop = true
@@ -165,7 +113,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 
 length = 0.4
 loop = true
@@ -181,106 +129,96 @@ tracks/0/keys = {
 "values": [ 9, 10 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 
 length = 10.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Camera:transform/pos")
+tracks/0/path = NodePath("Player:transform/pos")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.6 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 144, 352 ), Vector2( 144, 448 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Player:transform/pos")
-tracks/1/interp = 1
-tracks/1/imported = false
-tracks/1/keys = {
 "times": FloatArray( 0, 3, 4.2, 4.3, 4.4, 5.9, 6, 6.1, 7.7, 7.9, 8.2, 8.6 ),
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 8, 465 ), Vector2( 137, 465 ), Vector2( 137, 465 ), Vector2( 137, 463 ), Vector2( 137, 465 ), Vector2( 137, 465 ), Vector2( 137, 463 ), Vector2( 137, 465 ), Vector2( 137, 465 ), Vector2( 227, 465 ), Vector2( 266, 433 ), Vector2( 329, 401 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Player:transform/scale")
-tracks/2/interp = 1
-tracks/2/imported = false
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player:transform/scale")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
 "times": FloatArray( 0, 5.9, 6.1, 7.3 ),
 "transitions": FloatArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Player/Emotions:frame")
-tracks/3/interp = 1
-tracks/3/imported = false
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/Emotions:frame")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
 "times": FloatArray( 0, 3.1, 4.2, 4.4, 6, 7.4 ),
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 38, 37, 38, 34, 36, 0 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Cake:transform/pos")
-tracks/4/interp = 1
-tracks/4/imported = false
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("Cake:transform/pos")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = {
 "times": FloatArray( 0, 3.5, 5 ),
 "transitions": FloatArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 162, 489 ), Vector2( 162, 489 ), Vector2( 162, 457 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Cake/Flare:transform/rot")
-tracks/5/interp = 1
-tracks/5/imported = false
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cake/Flare:transform/rot")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = {
 "times": FloatArray( 0, 3.5, 7.1 ),
 "transitions": FloatArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 360.0 ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Cake:visibility/visible")
-tracks/6/interp = 1
-tracks/6/imported = false
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/path = NodePath("Cake:visibility/visible")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = {
 "times": FloatArray( 0, 7.1 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("Boss:transform/pos")
-tracks/7/interp = 1
-tracks/7/imported = false
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/path = NodePath("Boss:transform/pos")
+tracks/6/interp = 1
+tracks/6/imported = false
+tracks/6/keys = {
 "times": FloatArray( 0, 6.1, 6.8, 7.1, 7.4, 9.9 ),
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -14, 465 ), Vector2( -14, 465 ), Vector2( 112, 465 ), Vector2( 158, 448 ), Vector2( 192, 465 ), Vector2( 872, 465 ) ]
+"values": [ Vector2( -128, 465 ), Vector2( -128, 465 ), Vector2( 112, 465 ), Vector2( 158, 448 ), Vector2( 192, 465 ), Vector2( 872, 465 ) ]
 }
-tracks/8/type = "value"
-tracks/8/path = NodePath("PlayerAnim:playback/play")
-tracks/8/interp = 1
-tracks/8/imported = false
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/path = NodePath("PlayerAnim:playback/play")
+tracks/7/interp = 1
+tracks/7/imported = false
+tracks/7/keys = {
 "times": FloatArray( 0, 3, 7.3, 7.7, 7.9, 8.2 ),
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ "Walk", "Idle", "Die", "Walk", "Jump", "" ]
 }
-tracks/9/type = "method"
-tracks/9/path = NodePath(".")
-tracks/9/interp = 1
-tracks/9/imported = false
-tracks/9/keys = {
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/imported = false
+tracks/8/keys = {
 "times": FloatArray( 0, 3, 7.3, 7.7, 7.9, 8.2 ),
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -300,7 +238,7 @@ tracks/9/keys = {
 "method": "_player_anim"
 }, {
 "args": [  ],
-"method": "_out_scene"
+"method": "_change_scene"
 } ]
 }
 
@@ -308,266 +246,11 @@ tracks/9/keys = {
 
 script/script = SubResource( 1 )
 
-[node name="Camera" type="Camera2D" parent="."]
-
-transform/pos = Vector2( 144, 352 )
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 0.25, 0.25 )
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-drag_margin/h_enabled = false
-drag_margin/v_enabled = false
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.2
-drag_margin/top = 0.2
-drag_margin/right = 0.2
-drag_margin/bottom = 0.2
-
-[node name="CRTFrame" type="Sprite" parent="Camera"]
-
-transform/pos = Vector2( -0.5, 2.98023e-07 )
-transform/scale = Vector2( 0.222736, 0.167488 )
-z/z = 3
-texture = ExtResource( 1 )
-
-[node name="Transition" type="Node2D" parent="Camera"]
-
-editor/display_folded = true
-transform/pos = Vector2( -128, -68 )
-transform/scale = Vector2( 0.25, 0.25 )
-z/z = 4
-
-[node name="ColorFrame" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 512.0
-margin/right = 960.0
-margin/bottom = 544.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame1" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -32.0
-margin/top = 480.0
-margin/right = 992.0
-margin/bottom = 512.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame2" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -64.0
-margin/top = 448.0
-margin/right = 1024.0
-margin/bottom = 480.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame3" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -96.0
-margin/top = 416.0
-margin/right = 1056.0
-margin/bottom = 448.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame4" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -128.0
-margin/top = 384.0
-margin/right = 1088.0
-margin/bottom = 416.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame5" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -160.0
-margin/top = 352.0
-margin/right = 1120.0
-margin/bottom = 384.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame6" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -192.0
-margin/top = 320.0
-margin/right = 1152.0
-margin/bottom = 352.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame7" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -224.0
-margin/top = 288.0
-margin/right = 1184.0
-margin/bottom = 320.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame8" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -256.0
-margin/top = 256.0
-margin/right = 1216.0
-margin/bottom = 288.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame9" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -288.0
-margin/top = 224.0
-margin/right = 1248.0
-margin/bottom = 256.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame10" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -320.0
-margin/top = 192.0
-margin/right = 1280.0
-margin/bottom = 224.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame11" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -352.0
-margin/top = 160.0
-margin/right = 1312.0
-margin/bottom = 192.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame12" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -384.0
-margin/top = 128.0
-margin/right = 1344.0
-margin/bottom = 160.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame13" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -416.0
-margin/top = 96.0
-margin/right = 1376.0
-margin/bottom = 128.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame14" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -448.0
-margin/top = 64.0
-margin/right = 1408.0
-margin/bottom = 96.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame15" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -480.0
-margin/top = 32.0
-margin/right = 1440.0
-margin/bottom = 64.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="ColorFrame16" type="ColorFrame" parent="Camera/Transition"]
-
-rect/min_size = Vector2( 960, 32 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -512.0
-margin/top = 0.0
-margin/right = 1472.0
-margin/bottom = 32.0
-color = Color( 0, 0, 0, 1 )
-
 [node name="TileMap" type="TileMap" parent="."]
 
 transform/pos = Vector2( 1, 1 )
 mode = 0
-tile_set = ExtResource( 2 )
+tile_set = ExtResource( 1 )
 cell/size = Vector2( 16, 16 )
 cell/quadrant_size = 32
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -580,49 +263,50 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 1245210, 20, 1245211, 21, 1245212, 22, 1310744, 12, 1310746, 24, 1310747, 25, 1310748, 26, 1376277, 12, 1376282, 24, 1376283, 25, 1376284, 26, 1441818, 24, 1441819, 25, 1441820, 26, 1507354, 24, 1507355, 25, 1507356, 26, 1572886, 14, 1572887, 12, 1572888, 14, 1572890, 24, 1572891, 25, 1572892, 26, 1638426, 24, 1638427, 25, 1638428, 26, 1703956, 14, 1703962, 24, 1703963, 25, 1703964, 26, 1769498, 24, 1769499, 25, 1769500, 26, 1835024, 12, 1835025, 14, 1835026, 12, 1835034, 24, 1835035, 25, 1835036, 26, 1900553, 19, 1900554, 19, 1900556, 19, 1900570, 24, 1900571, 25, 1900572, 26, 1966080, 20, 1966081, 21, 1966082, 21, 1966083, 21, 1966084, 21, 1966085, 21, 1966086, 21, 1966087, 21, 1966088, 21, 1966089, 21, 1966090, 21, 1966091, 21, 1966092, 21, 1966093, 21, 1966094, 21, 1966095, 21, 1966096, 21, 1966097, 21, 1966098, 21, 1966099, 21, 1966100, 21, 1966101, 21, 1966102, 21, 1966103, 21, 1966104, 21, 1966105, 21, 1966106, 25, 1966107, 25, 1966108, 25, 1966109, 21, 1966110, 21, 1966111, 21, 1966112, 21, 1966113, 21, 1966114, 21, 1966115, 21, 1966116, 21, 1966117, 21, 1966118, 21, 1966119, 21, 1966120, 21, 1966121, 21, 1966122, 21, 1966123, 21, 2031616, 24, 2031617, 25, 2031618, 25, 2031619, 25, 2031620, 25, 2031621, 25, 2031622, 25, 2031623, 25, 2031624, 25, 2031625, 25, 2031626, 25, 2031627, 25, 2031628, 25, 2031629, 25, 2031630, 25, 2031631, 25, 2031632, 25, 2031633, 25, 2031634, 25, 2031635, 25, 2031636, 25, 2031637, 25, 2031638, 25, 2031639, 25, 2031640, 25, 2031641, 25, 2031642, 25, 2031643, 25, 2031644, 25, 2031645, 25, 2031646, 25, 2031647, 25, 2031648, 25, 2031649, 25, 2031650, 25, 2031651, 25, 2031652, 25, 2031653, 25, 2031654, 25, 2031655, 25, 2031656, 25, 2031657, 25, 2031658, 25, 2031659, 25, 2097152, 24, 2097153, 25, 2097154, 25, 2097155, 25, 2097156, 25, 2097157, 25, 2097158, 25, 2097159, 25, 2097160, 25, 2097161, 25, 2097162, 25, 2097163, 25, 2097164, 25, 2097165, 25, 2097166, 25, 2097167, 25, 2097168, 25, 2097169, 25, 2097170, 25, 2097171, 25, 2097172, 25, 2097173, 25, 2097174, 25, 2097175, 25, 2097176, 25, 2097177, 25, 2097178, 25, 2097179, 25, 2097180, 25, 2097181, 25, 2097182, 25, 2097183, 25, 2097184, 25, 2097185, 25, 2097186, 25, 2097187, 25, 2097188, 25, 2097189, 25, 2097190, 25, 2097191, 25, 2097192, 25, 2097193, 25, 2097194, 25, 2097195, 25, 2162688, 24, 2162689, 25, 2162690, 25, 2162691, 25, 2162692, 25, 2162693, 25, 2162694, 25, 2162695, 25, 2162696, 25, 2162697, 25, 2162698, 25, 2162699, 25, 2162700, 25, 2162701, 25, 2162702, 25, 2162703, 25, 2162704, 25, 2162705, 25, 2162706, 25, 2162707, 25, 2162708, 25, 2162709, 25, 2162710, 25, 2162711, 25, 2162712, 25, 2162713, 25, 2162714, 25, 2162715, 25, 2162716, 25, 2162717, 25, 2162718, 25, 2162719, 25, 2162720, 25, 2162721, 25, 2162722, 25, 2162723, 25, 2162724, 25, 2162725, 25, 2162726, 25, 2162727, 25, 2162728, 25, 2162729, 25, 2162730, 25, 2162731, 25 )
+tile_data = IntArray( 1245210, 27, 1245211, 28, 1245212, 29, 1310744, 19, 1310746, 31, 1310747, 32, 1310748, 33, 1376277, 15, 1376282, 31, 1376283, 32, 1376284, 33, 1441818, 31, 1441819, 32, 1441820, 33, 1507354, 31, 1507355, 32, 1507356, 33, 1572886, 15, 1572887, 19, 1572888, 15, 1572890, 31, 1572891, 32, 1572892, 33, 1638426, 31, 1638427, 32, 1638428, 33, 1703956, 15, 1703962, 31, 1703963, 32, 1703964, 33, 1769498, 31, 1769499, 32, 1769500, 33, 1835024, 19, 1835025, 15, 1835026, 19, 1835034, 31, 1835035, 32, 1835036, 33, 1900553, 26, 1900554, 26, 1900556, 26, 1900570, 31, 1900571, 32, 1900572, 33, 2031605, 28, 2031606, 28, 2031607, 28, 2031608, 28, 2031609, 28, 2031610, 28, 2031611, 28, 2031612, 28, 2031613, 28, 2031614, 28, 2031615, 28, 1966080, 28, 1966081, 28, 1966082, 28, 1966083, 28, 1966084, 28, 1966085, 28, 1966086, 28, 1966087, 28, 1966088, 28, 1966089, 28, 1966090, 28, 1966091, 28, 1966092, 28, 1966093, 28, 1966094, 28, 1966095, 28, 1966096, 28, 1966097, 28, 1966098, 28, 1966099, 28, 1966100, 28, 1966101, 28, 1966102, 28, 1966103, 28, 1966104, 28, 1966105, 28, 1966106, 28, 1966107, 28, 1966108, 28, 1966109, 28, 1966110, 28, 1966111, 28, 1966112, 28, 1966113, 28, 1966114, 28, 1966115, 28, 1966116, 28, 1966117, 28, 1966118, 28, 1966119, 28, 1966120, 28, 1966121, 28, 1966122, 28, 1966123, 28, 2097143, 32, 2097144, 32, 2097145, 32, 2097146, 32, 2097147, 32, 2097148, 32, 2097149, 32, 2097150, 32, 2097151, 32, 2031616, 32, 2031617, 32, 2031618, 32, 2031619, 32, 2031620, 32, 2031621, 32, 2031622, 32, 2031623, 32, 2031624, 32, 2031625, 32, 2031626, 32, 2031627, 32, 2031628, 32, 2031629, 32, 2031630, 32, 2031631, 32, 2031632, 32, 2031633, 32, 2031634, 32, 2031635, 32, 2031636, 32, 2031637, 32, 2031638, 32, 2031639, 32, 2031640, 32, 2031641, 32, 2031642, 32, 2031643, 32, 2031644, 32, 2031645, 32, 2031646, 32, 2031647, 32, 2031648, 32, 2031649, 32, 2031650, 32, 2031651, 32, 2031652, 32, 2031653, 32, 2031654, 32, 2031655, 32, 2031656, 32, 2031657, 32, 2031658, 32, 2031659, 32, 2162679, 32, 2162680, 32, 2162681, 32, 2162682, 32, 2162683, 32, 2162684, 32, 2162685, 32, 2162686, 32, 2162687, 32, 2097152, 32, 2097153, 32, 2097154, 32, 2097155, 32, 2097156, 32, 2097157, 32, 2097158, 32, 2097159, 32, 2097160, 32, 2097161, 32, 2097162, 32, 2097163, 32, 2097164, 32, 2097165, 32, 2097166, 32, 2097167, 32, 2097168, 32, 2097169, 32, 2097170, 32, 2097171, 32, 2097172, 32, 2097173, 32, 2097174, 32, 2097175, 32, 2097176, 32, 2097177, 32, 2097178, 32, 2097179, 32, 2097180, 32, 2097181, 32, 2097182, 32, 2097183, 32, 2097184, 32, 2097185, 32, 2097186, 32, 2097187, 32, 2097188, 32, 2097189, 32, 2097190, 32, 2097191, 32, 2097192, 32, 2097193, 32, 2097194, 32, 2097195, 32, 2228215, 32, 2228216, 32, 2228217, 32, 2228218, 32, 2228219, 32, 2228220, 32, 2228221, 32, 2228222, 32, 2228223, 32, 2162688, 32, 2162689, 32, 2162690, 32, 2162691, 32, 2162692, 32, 2162693, 32, 2162694, 32, 2162695, 32, 2162696, 32, 2162697, 32, 2162698, 32, 2162699, 32, 2162700, 32, 2162701, 32, 2162702, 32, 2162703, 32, 2162704, 32, 2162705, 32, 2162706, 32, 2162707, 32, 2162708, 32, 2162709, 32, 2162710, 32, 2162711, 32, 2162712, 32, 2162713, 32, 2162714, 32, 2162715, 32, 2162716, 32, 2162717, 32, 2162718, 32, 2162719, 32, 2162720, 32, 2162721, 32, 2162722, 32, 2162723, 32, 2162724, 32, 2162725, 32, 2162726, 32, 2162727, 32, 2162728, 32, 2162729, 32, 2162730, 32, 2162731, 32, 2293751, 32, 2293752, 32, 2293753, 32, 2293754, 32, 2293755, 32, 2293756, 32, 2293757, 32, 2293758, 32, 2293759, 32, 2228224, 32, 2228225, 32, 2228226, 32, 2228227, 32, 2228228, 32, 2228229, 32, 2228230, 32, 2228231, 32, 2228232, 32, 2228233, 32, 2228234, 32, 2228235, 32, 2228236, 32, 2228237, 32, 2228238, 32, 2228239, 32, 2228240, 32, 2359287, 32, 2359288, 32, 2359289, 32, 2359290, 32, 2359291, 32, 2359292, 32, 2359293, 32, 2359294, 32, 2359295, 32, 2293760, 32, 2293761, 32, 2293762, 32, 2293763, 32, 2293764, 32, 2293765, 32, 2293766, 32, 2293767, 32, 2293768, 32, 2293769, 32, 2293770, 32, 2293771, 32, 2293772, 32, 2293773, 32, 2293774, 32, 2293775, 32, 2293776, 32, 2424823, 32, 2424824, 32, 2424825, 32, 2424826, 32, 2424827, 32, 2424828, 32, 2424829, 32, 2424830, 32, 2424831, 32, 2359296, 32, 2359297, 32, 2359298, 32, 2359299, 32, 2359300, 32, 2359301, 32, 2359302, 32, 2359303, 32, 2359304, 32, 2359305, 32, 2359306, 32, 2359307, 32, 2359308, 32, 2359309, 32, 2359310, 32, 2359311, 32, 2359312, 32, 2490359, 32, 2490360, 32, 2490361, 32, 2490362, 32, 2490363, 32, 2490364, 32, 2490365, 32, 2490366, 32, 2490367, 32, 2424832, 32, 2424833, 32, 2424834, 32, 2424835, 32, 2424836, 32, 2424837, 32, 2424838, 32, 2424839, 32, 2424840, 32, 2424841, 32, 2424842, 32, 2424843, 32, 2424844, 32, 2424845, 32, 2424846, 32, 2424847, 32, 2424848, 32, 2555895, 32, 2555896, 32, 2555897, 32, 2555898, 32, 2555899, 32, 2555900, 32, 2555901, 32, 2555902, 32, 2555903, 32, 2490368, 32, 2490369, 32, 2490370, 32, 2490371, 32, 2490372, 32, 2490373, 32, 2490374, 32, 2490375, 32, 2490376, 32, 2490377, 32, 2490378, 32, 2490379, 32, 2490380, 32, 2490381, 32, 2490382, 32, 2490383, 32, 2490384, 32, 2621431, 32, 2621432, 32, 2621433, 32, 2621434, 32, 2621435, 32, 2621436, 32, 2621437, 32, 2621438, 32, 2621439, 32, 2555904, 32, 2555905, 32, 2555906, 32, 2555907, 32, 2555908, 32, 2555909, 32, 2555910, 32, 2555911, 32, 2555912, 32, 2555913, 32, 2555914, 32, 2555915, 32, 2555916, 32, 2555917, 32, 2555918, 32, 2555919, 32, 2555920, 32, 2686967, 32, 2686968, 32, 2686969, 32, 2686970, 32, 2686971, 32, 2686972, 32, 2686973, 32, 2686974, 32, 2686975, 32, 2621440, 32, 2621441, 32, 2621442, 32, 2621443, 32, 2621444, 32, 2621445, 32, 2621446, 32, 2621447, 32, 2621448, 32, 2621449, 32, 2621450, 32, 2621451, 32, 2621452, 32, 2621453, 32, 2621454, 32, 2621455, 32, 2621456, 32, 2752503, 32, 2752504, 32, 2752505, 32, 2752506, 32, 2752507, 32, 2752508, 32, 2752509, 32, 2752510, 32, 2752511, 32, 2686976, 32, 2686977, 32, 2686978, 32, 2686979, 32, 2686980, 32, 2686981, 32, 2686982, 32, 2686983, 32, 2686984, 32, 2686985, 32, 2686986, 32, 2686987, 32, 2686988, 32, 2686989, 32, 2686990, 32, 2686991, 32, 2686992, 32 )
 
 [node name="House" type="Sprite" parent="."]
 
 transform/pos = Vector2( 42, 427 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 flip_h = true
 
 [node name="Player" type="Sprite" parent="."]
 
 editor/display_folded = true
 transform/pos = Vector2( 8, 465 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 vframes = 14
 hframes = 8
-frame = 12
+frame = 11
 
 [node name="Emotions" type="Sprite" parent="Player"]
 
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 offset = Vector2( 1, -5 )
 vframes = 7
 hframes = 6
 frame = 38
 
-[node name="ParallaxBackground" parent="." instance=ExtResource( 6 )]
+[node name="ParallaxBackground" parent="." instance=ExtResource( 5 )]
 
 [node name="Cake" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 162, 489 )
 z/z = -1
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 
 [node name="Flare" type="Sprite" parent="Cake"]
 
 z/z = -1
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="Boss" type="Sprite" parent="."]
 
 editor/display_folded = true
-transform/pos = Vector2( -14, 465 )
-texture = ExtResource( 4 )
+transform/pos = Vector2( -128, 465 )
+texture = ExtResource( 3 )
 flip_h = true
 vframes = 14
 hframes = 8
@@ -639,28 +323,16 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="TransitionAnim" type="AnimationPlayer" parent="."]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/In = SubResource( 3 )
-anims/Out = SubResource( 4 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "In"
-
 [node name="PlayerAnim" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Die = SubResource( 5 )
-anims/Fall = SubResource( 6 )
-anims/Idle = SubResource( 7 )
-anims/Jump = SubResource( 8 )
-anims/Walk = SubResource( 9 )
+anims/Die = SubResource( 3 )
+anims/Fall = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Jump = SubResource( 6 )
+anims/Walk = SubResource( 7 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -671,7 +343,7 @@ autoplay = "Walk"
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Intro = SubResource( 10 )
+anims/Intro = SubResource( 8 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

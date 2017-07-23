@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=1]
+[gd_scene load_steps=33 format=1]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://UI/CRTFrame.png" type="Texture" id=2]
@@ -123,13 +123,13 @@ script/source = "extends Timer
 
 var time_left = 0
 var time_node
+var controller
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
 	time_left = get_wait_time()
 	time_node = get_parent().get_node(\"Time\")
 	time_node.set_text(\"%03d\" % (floor(time_left)))
+	controller = get_node(\"/root/Controller\")
 
 func _process(delta):
 	time_left = get_time_left()
@@ -139,7 +139,8 @@ func _process(delta):
 
 
 func _on_Timer_timeout():
-	get_parent().get_parent()._dying()
+	controller.life_down()
+	controller.life_down()
 "
 
 [sub_resource type="DynamicFont" id=13]
@@ -238,6 +239,13 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="DynamicFont" id=18]
+
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 6 )
+
 [node name="Main" type="Node2D"]
 
 script/script = ExtResource( 1 )
@@ -266,7 +274,14 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
-[node name="Transition" type="Node2D" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Transition" type="Node2D" parent="UI"]
 
 editor/display_folded = true
 z/z = 10
@@ -274,7 +289,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Polygon2D" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D" type="Polygon2D" parent="UI/Transition"]
 
 polygon = Vector2Array( 0, 180, 320, 180, 320, 170, 0, 170 )
 uv = Vector2Array(  )
@@ -288,7 +303,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D1" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D1" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -4 )
 polygon = Vector2Array( -8, 174, 328, 174, 328, 164, -8, 164 )
@@ -303,7 +318,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D2" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D2" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -8 )
 polygon = Vector2Array( -16, 168, 336, 168, 336, 158, -16, 158 )
@@ -318,7 +333,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D3" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D3" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -12 )
 polygon = Vector2Array( -24, 162, 344, 162, 344, 152, -24, 152 )
@@ -333,7 +348,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D4" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D4" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -22 )
 polygon = Vector2Array( -32, 162, 352, 162, 352, 152, -32, 152 )
@@ -348,7 +363,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D5" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D5" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -32 )
 polygon = Vector2Array( -40, 162, 360, 162, 360, 152, -40, 152 )
@@ -363,7 +378,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D6" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D6" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -42 )
 polygon = Vector2Array( -48, 162, 368, 162, 368, 152, -48, 152 )
@@ -378,7 +393,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D7" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D7" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -52 )
 polygon = Vector2Array( -56, 162, 376, 162, 376, 152, -56, 152 )
@@ -393,7 +408,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D8" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D8" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -62 )
 polygon = Vector2Array( -64, 162, 384, 162, 384, 152, -64, 152 )
@@ -408,7 +423,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D9" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D9" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -72 )
 polygon = Vector2Array( -72, 162, 392, 162, 392, 152, -72, 152 )
@@ -423,7 +438,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D10" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D10" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -82 )
 polygon = Vector2Array( -80, 162, 400, 162, 400, 152, -80, 152 )
@@ -438,7 +453,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D11" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D11" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -92 )
 polygon = Vector2Array( -88, 162, 408, 162, 408, 152, -88, 152 )
@@ -453,7 +468,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D12" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D12" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -102 )
 polygon = Vector2Array( -96, 162, 416, 162, 416, 152, -96, 152 )
@@ -468,7 +483,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D13" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D13" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -112 )
 polygon = Vector2Array( -104, 152, 424, 152, 424, 162, -104, 162 )
@@ -483,7 +498,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D14" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D14" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -122 )
 polygon = Vector2Array( -112, 152, 432, 152, 432, 162, -112, 162 )
@@ -498,7 +513,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D15" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D15" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -132 )
 polygon = Vector2Array( -120, 152, 440, 152, 440, 162, -120, 162 )
@@ -513,7 +528,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D16" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D16" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -142 )
 polygon = Vector2Array( -128, 152, 448, 152, 448, 162, -128, 162 )
@@ -528,7 +543,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Polygon2D17" type="Polygon2D" parent="Transition"]
+[node name="Polygon2D17" type="Polygon2D" parent="UI/Transition"]
 
 transform/pos = Vector2( 0, -152 )
 polygon = Vector2Array( -136, 152, 456, 152, 456, 162, -136, 162 )
@@ -543,7 +558,7 @@ texture/rotation = 0.0
 invert/enable = false
 invert/border = 100.0
 
-[node name="Animation" type="AnimationPlayer" parent="Transition"]
+[node name="Animation" type="AnimationPlayer" parent="UI/Transition"]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
@@ -555,16 +570,7 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-
 [node name="Inner" type="Node2D" parent="UI"]
-
-visibility/visible = false
 
 [node name="CRTFrame" type="Sprite" parent="UI/Inner"]
 
@@ -579,6 +585,7 @@ __meta__ = {
 
 transform/pos = Vector2( 240, 112 )
 transform/scale = Vector2( 0.5, 0.5 )
+z/z = -1
 normal = ExtResource( 3 )
 pressed = null
 bitmask = null
@@ -700,6 +707,7 @@ autoplay = ""
 
 transform/pos = Vector2( 56, 130 )
 transform/scale = Vector2( 0.5, 0.5 )
+z/z = -1
 normal = ExtResource( 7 )
 pressed = null
 bitmask = null
@@ -717,6 +725,7 @@ __meta__ = {
 
 transform/pos = Vector2( 8, 130 )
 transform/scale = Vector2( 0.5, 0.5 )
+z/z = -1
 normal = ExtResource( 8 )
 pressed = null
 bitmask = null
@@ -991,6 +1000,7 @@ radial_fill/center_offset = Vector2( 0, 0 )
 
 [node name="TextWindow" type="AnimationPlayer" parent="UI/Inner"]
 
+editor/display_folded = true
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
@@ -1008,20 +1018,28 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 14.0
+margin/left = 36.0
+margin/top = 136.0
+margin/right = 284.0
+margin/bottom = 160.0
+custom_fonts/font = SubResource( 18 )
+autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Box" type="Sprite" parent="UI/Inner/TextWindow"]
 
 visibility/visible = false
 transform/pos = Vector2( 160, 148 )
-transform/scale = Vector2( 1, 1e-05 )
+z/z = -1
 texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Timer" type="Timer" parent="UI/Inner/TextWindow"]
 
@@ -1056,6 +1074,8 @@ autostart = false
 [connection signal="pressed" from="UI/Inner/pause/RetryButton" to="UI/Inner/pause" method="_on_RetryButton_pressed"]
 
 [connection signal="timeout" from="UI/Inner/Clock/Timer" to="UI/Inner/Clock/Timer" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="UI/Inner/TextWindow/Timer" to="UI/Inner/TextWindow" method="_on_Timer_timeout"]
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 

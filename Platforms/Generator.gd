@@ -31,7 +31,7 @@ func _ready():
 	get_node("/root/Global").seeder = global_seed
 
 func _gen_map():
-	for b in range(10):
+	for b in range(12):
 		randomize()
 		var gap = floor(rand_range(0, 5))
 		var rndGap = gap*tilemap.get_cell_size().x
